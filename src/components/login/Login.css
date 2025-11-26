@@ -1,0 +1,100 @@
+@charset "UTF-8";
+
+body{
+    min-height: 100vh;
+    background: linear-gradient(to top, var(--cor2), var(--cor6));
+}
+
+img.logo{
+    width: 250px;
+}
+
+section.container{
+    width: 500px;
+
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.271);
+    background-color: #0c492a48;
+
+    padding: 40px;
+}
+
+section.container h1{
+    text-align: center;
+    font-size: 30px;
+    color: white;
+    text-shadow: 1px 1px black;
+}
+
+section.container div.input{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px auto;
+}
+
+div.input input{
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--cor4);
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.253);
+    border-radius: 40px;
+    font-size: 16px;
+    color: black;
+    padding: 20px;
+}
+
+div.input .icon{
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}
+
+div.lembranca{
+    display: flex;
+    margin: -15px 0 15px;
+    font-size: 14.5px;
+    color: white;
+}
+
+section.container button{
+  width: 100%;
+  height: 50px;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.253);
+  background-color: var(--cor3);
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+
+  cursor: pointer;
+}
+
+section.container button:hover{
+  background-color: var(--cor4);
+  color: var(--cor3);
+}
+
+section.container div.cadastro{
+    font-size: 14px;
+    text-align: center;
+    margin: 20px 0 10px;
+    color: var(--cor4);
+}
+
+section.container div.cadastro > p > a{
+    color: var(--cor4);
+    font-weight: bold;
+}
+
+
+
+
+

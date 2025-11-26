@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+:root{
+  --cor1: #008342;       
+  --cor2: #4DBB73;  
+  --cor3: #006B36; 
+  --cor4: #F2F2F2;     
+  --cor5: #333333;   
+  --cor6: #E8F5EC;
+}
+
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: Helvetica;
+}
+
+.App{
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
