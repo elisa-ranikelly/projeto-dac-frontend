@@ -1,21 +1,25 @@
 @charset "UTF-8";
 
 body{
-    min-height: 100vh;
     background: linear-gradient(to top, var(--cor2), var(--cor6));
 }
 
+article.page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 img.logo{
-    width: 250px;
+    width: 200px;
 }
 
 section.container{
     width: 500px;
-
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.271);
     background-color: #0c492a48;
-
     padding: 40px;
 }
 
@@ -94,7 +98,6 @@ section.container div.cadastro > p > a{
     font-weight: bold;
 }
 
-
-
-
-
+section.container div.cadastro > p > a:hover{
+    color: var(--cor3);
+}

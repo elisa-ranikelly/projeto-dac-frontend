@@ -5,7 +5,7 @@ import logo from "../../assets/logo-negociaif-fundo-trasparente.png";
 import "./Login.css";
 
 const Login = () => {
-    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const submicao = (event) =>{
@@ -16,7 +16,7 @@ const Login = () => {
 
   return (
 
-    <article className="login-page">
+    <article className="page">
         <img src={logo} alt="Logo" className="logo" />
 
         <section className="container">
@@ -25,7 +25,7 @@ const Login = () => {
                 <h1>Acesse o sistema</h1>
 
                 <div className="input">
-                    <input type="email" placeholder="E-mail acadêmico" required onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="email" placeholder="E-mail acadêmico" required onChange={(e) => setEmail(e.target.value)}/>
                     <FaUser className="icon"/>
                 </div>
 
@@ -36,7 +36,7 @@ const Login = () => {
 
                 <div className="lembranca">
                     <label>
-                        <input type="checkbox"/> Lembre de mim
+                        <input type="checkbox"/> Lembre-se de mim
                     </label>
                 </div>
                 <button type="submit">Entrar</button>
