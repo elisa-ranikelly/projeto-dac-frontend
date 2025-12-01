@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+article.itens-container{
+    background-color: var(--cor4);
+}
+
+nav.menu{
+    background-color: var(--cor3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 20px;
+}
+
+.menu-left, .menu-center, .menu-right {
+    display: flex;
+    align-items: center;
+}
+
+.menu-center {
+    flex: 1;
+    justify-content: center;
+}
+
+.logo-menu{
+    width: 65px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.barra-pesquisa{
+    display: flex;
+    gap: 8px;
+}
+
+.barra-pesquisa input{
+    width: 300px;
+    height: 35px;
+    border-radius: 15px;
+    padding: 10px;
+    outline: none;
+    border: none;
+}
+
+.btn-lupa{
+    background-color: var(--cor2);
+    width: 40px;
+    border-radius: 10px;
+    border: none;
+
+    cursor: pointer;
+
+}
+
+.icon-lupa{
+    color: white;
+}
+
+.select-categorias select{
+    background-color: var(--cor2);
+    color: white;
+    width: 180px;
+    height: 35px;
+    margin-left: 30px;
+    text-align: center;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+    outline: none;
+
+    cursor: pointer;
+}
+
+.btn-cadastrar-item{
+    background-color: var(--cor2);
+    color: white;
+    width: 150px;
+    height: 35px;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+    outline: none;
+    margin-right: 40px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon-cesta {
+    font-size: 1.1rem;
+    
+}
+
+.perfil-icon{
+    color: white;
+    font-size: 2.2rem;
+    cursor: pointer;
+
+    margin-right: 20px;
+}

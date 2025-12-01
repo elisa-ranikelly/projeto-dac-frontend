@@ -10,7 +10,6 @@ const Login = () => {
 
     const submicao = (event) =>{
         event.preventDefault();
-        console.log("Envio.");
     }
         
 
