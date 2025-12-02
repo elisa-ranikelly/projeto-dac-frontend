@@ -1,17 +1,20 @@
 import {FaUser, FaLock} from "react-icons/fa";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo-negociaif-fundo-trasparente.png";
 import "./login.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    // Para uso das rotas sem usar o Link
+    const navigate = useNavigate();
 
     const submicao = (event) =>{
         event.preventDefault();
+        // Entra no catalogo ao clicar no botão entrar
+        navigate("/catalogo");
     }
-        
 
   return (
 

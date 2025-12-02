@@ -53,6 +53,13 @@ const CadastroItem = () => {
         };
 
         console.log("Item cadastrado!");
+
+        setNome("");
+        setDescricao("");
+        setStatusDisponibilidade("");
+        setPreco("");
+        setCategoria("");
+        setFotos([]);
     };
 
     const handleFotos = (event) => {
@@ -107,6 +114,8 @@ const CadastroItem = () => {
                     </div>
 
                     <button type="submit">Cadastrar</button>
+
+                    <Link to={"/catalogo"} className="btn-catalogo">Catálogo</Link>
 
                 </form>
             </section>

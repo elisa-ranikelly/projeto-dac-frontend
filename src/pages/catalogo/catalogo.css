@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
-article.itens-container{
+/*article.itens-container{
     background-color: var(--cor4);
-}
+}*/
 
 nav.menu{
     background-color: var(--cor3);
@@ -12,48 +12,64 @@ nav.menu{
     padding: 5px 20px;
 }
 
-.menu-left, .menu-center, .menu-right {
+.menu-left {
+    width: 60px;
     display: flex;
     align-items: center;
 }
 
 .menu-center {
     flex: 1;
+    display: flex;
     justify-content: center;
+    align-items: center;
 }
 
+.menu-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-left: 40px; 
+    margin-right: 10px;
+}
+
+
 .logo-menu{
-    width: 65px;
-    background-color: white;
-    border-radius: 50%;
+    width: 200px;
+    display: block;
+    margin: auto;
 }
 
 .barra-pesquisa{
     display: flex;
-    gap: 8px;
+    width: 45%;
+    min-width: 280px;
 }
 
 .barra-pesquisa input{
-    width: 300px;
-    height: 35px;
-    border-radius: 15px;
-    padding: 10px;
-    outline: none;
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 10px 0 0 10px;
     border: none;
+    outline: none;
+
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.073);
 }
 
 .btn-lupa{
     background-color: var(--cor2);
-    width: 40px;
-    border-radius: 10px;
+    padding: 0 15px;
     border: none;
-
+    border-radius: 0 10px 10px 0;
     cursor: pointer;
-
 }
 
 .icon-lupa{
-    color: white;
+    color: var(--cor4);
+}
+
+.btn-lupa:hover{
+    background-color: var(--cor1);
 }
 
 .select-categorias select{
@@ -67,6 +83,7 @@ nav.menu{
     font-weight: bold;
     font-size: 1.1em;
     outline: none;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.073);
 
     cursor: pointer;
 }
@@ -83,16 +100,19 @@ nav.menu{
     font-size: 1.1em;
     outline: none;
     margin-right: 40px;
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.073);
 
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
 }
+.btn-cadastrar-item:hover, .select-categorias select:hover {
+    background: var(--cor1);
+}
 
 .icon-cesta {
-    font-size: 1.1rem;
-    
+    font-size: 1.1rem;   
 }
 
 .perfil-icon{
@@ -100,5 +120,48 @@ nav.menu{
     font-size: 2.2rem;
     cursor: pointer;
 
-    margin-right: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.itens{
+    width: 100%;
+    display: grid;
+    gap: 20px;
+    margin: 30px 0;
+    padding: 20px 20px;
+    box-sizing: border-box;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+}
+
+.paginacao {
+    margin: 25px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+.paginacao button {
+    font-size: 1.8rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.paginacao button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.paginacao button:hover:not(:disabled) {
+    transform: scale(1.2);
+}
+
+.paginacao span {
+    font-size: 1.2rem;
+    font-weight: bold;
 }

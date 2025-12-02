@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./catalogo.css";
 import Itens from "../../components/itens";
-import logo from "../../assets/logo-negociaif-fundo-trasparente.png";
+import logo from "../../assets/letreiro-branco.png";
 import { Link } from "react-router-dom";
 import { FaShoppingBasket, FaUserCircle } from "react-icons/fa";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
@@ -79,11 +79,70 @@ export default function Catalogo() {
                 id: 2,
                 nome: "Notebook Samsung",
                 descricao: "Semi-novo, 8GB RAM",
-                statusDisponibilidade: "DISPONIVEL_VENDA",
-                preco: 2200,
+                statusDisponibilidade: "DISPONIVEL_TROCA",
                 telefone: "(81) 88888-8888",
                 fotos: ""
+            },
+            {
+                id: 3,
+                nome: "Notebook Samsung",
+                descricao: "Semi-novo, 8GB RAM",
+                statusDisponibilidade: "DISPONIVEL_TROCA",
+                telefone: "(81) 88888-8888",
+                fotos: ""
+            },
+            {
+                id: 4,
+                nome: "Kit de canetas",
+                descricao: "Kit de canetas azuis novo com 15 unidades.",
+                statusDisponibilidade: "DISPONIVEL_VENDA",
+                preco: 15.0,
+                telefone: "(83) 99999-9999",
+                fotos: ""
+            },
+            {
+                id: 5,
+                nome: "Notebook Samsung",
+                descricao: "Semi-novo, 8GB RAM",
+                statusDisponibilidade: "DISPONIVEL_TROCA",
+                telefone: "(81) 88888-8888",
+                fotos: ""
+            },
+            {
+                id: 6,
+                nome: "Kit de canetas",
+                descricao: "Kit de canetas azuis novo com 15 unidades.",
+                statusDisponibilidade: "DISPONIVEL_VENDA",
+                preco: 15.0,
+                telefone: "(83) 99999-9999",
+                fotos: ""
+            },
+            {
+                id: 7,
+                nome: "Notebook Samsung",
+                descricao: "Semi-novo, 8GB RAM",
+                statusDisponibilidade: "DISPONIVEL_TROCA",
+                telefone: "(81) 88888-8888",
+                fotos: ""
+            },
+            {
+                id: 8,
+                nome: "Notebook Samsung",
+                descricao: "Semi-novo, 8GB RAM",
+                statusDisponibilidade: "DISPONIVEL_TROCA",
+                telefone: "(81) 88888-8888",
+                fotos: ""
+            },
+            {
+                id: 9,
+                nome: "Kit de canetas",
+                descricao: "Kit de canetas azuis novo com 15 unidades.",
+                statusDisponibilidade: "DISPONIVEL_VENDA",
+                preco: 15.0,
+                telefone: "(83) 99999-9999",
+                fotos: ""   
             }
+
         ];   
 
         setItens(itensAprovadosSimulados);
@@ -106,7 +165,9 @@ export default function Catalogo() {
                             <FaSearch className="icon-lupa" />
                         </button>
                     </div>
+                </div>
 
+                <div className="menu-right">
                     <div className="select-categorias">
                         <select value={categoriaSelecionada} onChange={(e) => {
                             setCategoriaSelecionada(e.target.value);
@@ -120,9 +181,6 @@ export default function Catalogo() {
                             ))}
                         </select>
                     </div>
-                </div>
-
-                <div className="menu-right">
                     <Link to="/cadastro-item" className="btn-cadastrar-item"> 
                         Criar item 
                         <FaShoppingBasket className="icon-cesta" />
@@ -135,27 +193,28 @@ export default function Catalogo() {
             </nav>
 
             <section className="itens">
-                {itens.map((item) => (
+                {itensPagina.map((item) => (
                     <Itens key={item.id} item={item} />
                 ))}
             </section>
-            
-            {itens.length > 0 && (
-                <section className="paginacao">
-                    <button
-                        disabled={paginaAtual == 1}
-                        onClick={() => setPaginaAtual(paginaAtual - 1)} >
-                            <FaArrowCircleLeft/>
-                    </button>
 
-                    <span>{paginaAtual} / {totalPaginas}</span>
-
-                    <button disabled={paginaAtual === totalPaginas} onClick={() => setPaginaAtual(paginaAtual + 1)}>
-                        <FaArrowCircleRight/>
-                    </button>
-                </section>
-            )}
+            <footer>
+                {itens.length > 0 && (
+                    <section className="paginacao">
+                        <button
+                            disabled={paginaAtual == 1}
+                            onClick={() => setPaginaAtual(paginaAtual - 1)} >
+                                <FaArrowCircleLeft/>
+                        </button>
+                        <span>{paginaAtual} / {totalPaginas}</span>
+                        <button disabled={paginaAtual === totalPaginas} onClick={() => setPaginaAtual(paginaAtual + 1)}>
+                            <FaArrowCircleRight/>
+                        </button>
+                    </section>
+                )}
+            </footer>
         </article>
+        
     );
 
 }

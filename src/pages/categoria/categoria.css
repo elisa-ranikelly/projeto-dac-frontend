@@ -27,7 +27,7 @@ section.cadastro-categoria-container div.input{
     margin: 30px auto;
 }
 
-section.cadastro-categoria-container button{
+section.cadastro-categoria-container button, .btn-voltar{
   width: 85%;
   height: 50px;
   border: none;
@@ -45,7 +45,15 @@ section.cadastro-categoria-container button{
   cursor: pointer;
 }
 
-section.cadastro-categoria-container button:hover{
+.btn-voltar{
+  margin-top: 15px;
+  text-decoration: none;
+  text-align: center;
+  padding-top: 15px;
+
+}
+
+section.cadastro-categoria-container button:hover, .btn-voltar:hover{
   background-color: var(--cor4);
   color: var(--cor3);
 }

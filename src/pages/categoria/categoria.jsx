@@ -21,6 +21,7 @@ const Categoria = () => {
                 </div>
 
                 <button type="submit">Cadastrar</button>
+                <Link to={"/perfil-admin"} className="btn-voltar">Voltar</Link>
             </form>
         </section>
 
