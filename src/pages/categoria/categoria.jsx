@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./categoria.css";
+import "../media-queries/forms.css";
 
 const Categoria = () => {
     const [nomeCategoria, setNomeCategoria] = useState("");

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./cadastro-item.css";
+import "../media-queries/forms.css";
 
 const CadastroItem = () => {
 

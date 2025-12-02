@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { FaShoppingBasket, FaUserCircle } from "react-icons/fa";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
+import "../media-queries/catalogo-resp.css";
+
 
 export default function Catalogo() {
     const [categorias, setCategorias] = useState([]);
@@ -14,6 +16,8 @@ export default function Catalogo() {
     const [itens, setItens] = useState([]);
     const [paginaAtual, setPaginaAtual] = useState(1);
     const itensPorPagina = 8;
+
+    const [openMenu, setOpenMenu] = useState(false);
 
     async function buscarNome(){
 
@@ -185,10 +189,18 @@ export default function Catalogo() {
                         Criar item 
                         <FaShoppingBasket className="icon-cesta" />
                     </Link>
+                </div>
 
-                    <Link to="/perfil-usuario" className="perfil-icon">
-                        <FaUserCircle />
-                    </Link>
+                <div className="perfil-container">
+                    <button className="perfil-icon" onClick={() => setOpenMenu(!openMenu)}> <FaUserCircle />
+                    </button>
+
+                    {openMenu && (
+                        <div className="perfil-dropdown">
+                            <Link to="/perfil-usuario" className="dropdown-item">Perfil</Link>
+                            <Link to="/" className="dropdown-item">Sair</Link>
+                        </div>
+                    )}
                 </div>
             </nav>
 

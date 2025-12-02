@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo-negociaif-fundo-trasparente.png";
 import "./login.css";
+import "../media-queries/forms.css";
 
 const Login = () => {
     const [email, setEmail] = useState("");

@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+@media screen and (max-width: 768px){
+
+    section.container{
+        width: 85%;
+        padding: 20px;
+        margin: 30px 10px;
+    }
+
+    section.cadastro-categoria-container{
+        width: 80%;
+        max-width: 400px;
+    }
+
+    section.cadastro-container,
+    section.cadastro-item-container{
+        width: 90%;
+        max-width: 340px;
+        padding: 18px 20px;
+        margin: 0 auto;
+    }
+
+    img.logo{
+        width: 100px;
+        margin-top: 30px;        
+    }
+
+    h1{
+        font-size: 20px;
+    }
+
+    div.input{
+        height: 45px;
+        margin: 20px 0;
+    }
+
+    div.input input,
+    textarea,
+    select{
+        font-size: 14px;
+        padding: 14px 18px;
+    }
+
+    .icon{
+        font-size: 16px;
+        right: 18px;
+    }
+
+    button, 
+    .btn-voltar,
+    .btn-catalogo {
+        height: 45px;
+        font-size: 15px;
+    }
+}
+
+
+@media screen and (min-width: 768px) and (max-width: 992px){
+
+    section.container,
+    section.cadastro-container,
+    section.cadastro-categoria-container,
+    section.cadastro-item-container{
+        width: 400px;
+        padding: 30px;
+    }
+
+    img.logo{
+        width: 130px;
+    }
+
+    h1{
+        font-size: 28px !important;
+    }
+
+    div.input input,
+    textarea,
+    select{
+        font-size: 15px;
+        padding: 18px;
+    }
+
+    button, 
+    .btn-voltar,
+    .btn-catalogo {
+        font-size: 15px;
+        height: 45px;
+    }
+}
