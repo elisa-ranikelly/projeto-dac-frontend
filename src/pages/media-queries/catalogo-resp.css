@@ -1,2 +1,171 @@
+@charset "UTF-8";
+
+@media screen and (max-width: 768px){
+ 
+    nav.menu {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+        padding: 10px 12px;
+
+        position: relative;
+    }
+
+    .logo-menu {
+        width: 140px;
+        margin: 0;
+    }
+
+    .menu-left {
+        order: 1;
+        width: 100%;
+        display: flex;
+        padding-left: 5px;
+    }
+
+    .menu-right {
+        order: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center; 
+        gap: 10px;
+        width: 100%;
+        padding-right: 25px;
+        
+    }
+
+    .perfil-container {
+        position: absolute;
+        top: 0;
+        right: 12px;        
+        z-index: 50;
+        padding-top: 5px;
+        margin: 0;
+    }
+
+    .perfil-icon {
+        font-size: 1.8rem;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu-center {
+        order: 3;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 6px;
+    }
 
 
+    .select-categorias select {
+        width: 120px;             
+        height: 34px;
+        padding: 0 8px;
+        font-size: 0.95em;
+        border-radius: 12px;
+        margin: 0;
+    }
+
+    .btn-cadastrar-item {
+        width: auto;
+        height: 34px;
+        padding: 0 12px;
+        font-size: 0.95em;
+        border-radius: 12px;
+        margin: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+
+    .barra-pesquisa {
+        width: 80%; 
+    }
+
+    .barra-pesquisa input {
+        padding: 8px 10px;
+        font-size: 0.95em;
+        border-radius: 8px 0 0 8px;
+    }
+
+    .btn-lupa {
+        padding: 0 10px;
+        height: 36px;
+        border-radius: 0 8px 8px 0;
+    }
+    .perfil-dropdown {
+        top: 42px;
+        right: 0;
+        min-width: 140px;
+    }
+
+    .itens{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px){
+
+    nav.menu {
+        flex-wrap: nowrap;
+    }
+
+    .logo-menu {
+        width: 120px;
+        margin: 0 10px;
+    }
+
+    .menu-right {
+        gap: 10px;
+        flex-wrap: nowrap;
+    }
+
+    .select-categorias select {
+        width: 130px;
+        height: 32px;
+        font-size: 0.9em;
+        padding: 0 6px;
+    }
+
+    .btn-cadastrar-item {
+        width: 110px;
+        height: 32px;
+        font-size: 0.9em;
+        margin-right: 0;
+        border-radius: 14px;
+        gap: 6px;
+    }
+
+
+    .barra-pesquisa {
+        width: 40%;    
+        max-width: 300px;
+        height: 32px;
+        margin-left: 100px;
+    }
+
+    .barra-pesquisa input {
+        font-size: 0.95em;
+    }
+
+    .btn-lupa {
+        height: 32px;
+        padding: 0 10px;
+    }
+
+    .perfil-container {
+        margin-right: 10px;
+    }
+
+    .perfil-icon {
+        font-size: 1.5rem;
+        margin: 0;
+    }
+
+    .itens {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}

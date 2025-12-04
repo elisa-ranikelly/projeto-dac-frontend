@@ -10,7 +10,7 @@
 
     section.cadastro-categoria-container{
         width: 80%;
-        max-width: 400px;
+        max-width: 370px;
     }
 
     section.cadastro-container,
@@ -27,7 +27,7 @@
     }
 
     h1{
-        font-size: 20px;
+        font-size: 25px;
     }
 
     div.input{
@@ -62,7 +62,7 @@
     section.cadastro-container,
     section.cadastro-categoria-container,
     section.cadastro-item-container{
-        width: 400px;
+        width: 450px;
         padding: 30px;
     }
 
@@ -71,7 +71,7 @@
     }
 
     h1{
-        font-size: 28px !important;
+        font-size: 28px;
     }
 
     div.input input,
