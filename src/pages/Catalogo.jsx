@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import "./catalogo.css";
-import Itens from "../../components/itens";
-import logo from "../../assets/letreiro-branco.png";
+import "./Catalogo.css";
+import Itens from "../components/ItemCard.jsx";
+import logo from "../assets/letreiro-branco.png";
 import { Link } from "react-router-dom";
 import { FaShoppingBasket, FaUserCircle } from "react-icons/fa";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
-import "../media-queries/catalogo-resp.css";
+import "./media-queries/catalogo-resp.css";
 
 
 export default function Catalogo() {

@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+.home-container {
+    width: 100%;
+    padding: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    margin-top: 30px;
+}
+
+.home-container h1{
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: var(--cor3);
+}
+
+.home-container h1 strong{
+    background-color: #4dbb7360;
+    color: var(--cor3);
+    padding: 0 8px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.184);
+}
+
+.home-container p{
+    margin-bottom: 10px;
+    color: var(--cor3);
+    font-size: 1.1em;
+}
+
+
+.home-container img{
+    width: 300px;
+    margin: 10px 0;
+}

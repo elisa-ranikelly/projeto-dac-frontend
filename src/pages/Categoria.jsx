@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import "./categoria.css";
-import "../media-queries/forms.css";
+import "./Categoria.css";
+import "./media-queries/forms.css";
+import Input from "../components/Input";
 
 const Categoria = () => {
     const [nomeCategoria, setNomeCategoria] = useState("");
@@ -17,12 +18,17 @@ const Categoria = () => {
         <section className="cadastro-categoria-container">
             <h1>Cadastre uma categoria</h1>
             <form onSubmit={cadastrarCategoria}>
-                <div className="input">
-                    <input type="text" placeholder="Categoria" required onChange={(e) => setNomeCategoria}/>
-                </div>
 
-                <button type="submit">Cadastrar</button>
-                <Link to={"/perfil-admin"} className="btn-voltar">Voltar</Link>
+                <Input
+                    type="text"
+                    placeholder="Categoria" 
+                    required
+                    onChange={(e) => setNomeCategoria} 
+                />
+
+                <button type="submit" className="btn">Cadastrar</button>
+
+                <Link to={"/perfil-admin"} className="btn">Voltar</Link>
             </form>
         </section>
 

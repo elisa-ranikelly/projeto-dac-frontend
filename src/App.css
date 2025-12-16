@@ -13,10 +13,10 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-family: Helvetica;
+  font-family: "Open Sans";
 }
 
-.App{
+body{
   min-height: 100vh;
 }
 

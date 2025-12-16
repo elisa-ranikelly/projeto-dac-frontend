@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
 import { FaRegHandshake, FaWhatsapp } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
-import "./itens.css";
+import "./ItemCard.css";
 
 export default function Itens({item}){
 
