@@ -1,0 +1,47 @@
+.barra-pesquisa{
+    display: flex;
+    width: 45%;
+    min-width: 280px;
+}
+
+.barra-pesquisa input{
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 10px 0 0 10px;
+    border: none;
+    outline: none;
+
+    box-shadow: 0 4px 0 rgba(0, 0, 0, 0.073);
+}
+
+.btn-lupa{
+    background-color: var(--cor2);
+    padding: 0 15px;
+    border: none;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+}
+
+.icon-lupa{
+    color: var(--cor4);
+}
+
+.btn-lupa:hover{
+    background-color: var(--cor1);
+}
+
+.select-categorias select{
+    background-color: var(--cor2);
+    color: white;
+    width: 180px;
+    height: 35px;
+    margin-left: 30px;
+    text-align: center;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.1em;
+    outline: none;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.073);
+
+    cursor: pointer;
+}

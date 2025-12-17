@@ -36,7 +36,7 @@ nav.menu{
     margin: auto;
 }
 
-.barra-pesquisa{
+/*.barra-pesquisa{
     display: flex;
     width: 45%;
     min-width: 280px;
@@ -82,7 +82,7 @@ nav.menu{
     box-shadow: 0 4px 0 rgba(0,0,0,0.073);
 
     cursor: pointer;
-}
+}*/
 
 .btn-cadastrar-item{
     background-color: var(--cor2);

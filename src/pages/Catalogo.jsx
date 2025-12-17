@@ -7,6 +7,10 @@ import { FaShoppingBasket, FaUserCircle } from "react-icons/fa";
 import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import { FaSearch } from "react-icons/fa";
 import "./media-queries/catalogo-resp.css";
+import BarraPesquisa from "../components/BarraPesquisa.jsx";
+import {listarCategorias} from "../services/categoriaService.js"
+import { listarItensPorCategoria, buscarItemPorNomeECategoria } from "../services/ItemService.js";
+import { toast } from "react-toastify";
 
 
 export default function Catalogo() {
@@ -14,21 +18,40 @@ export default function Catalogo() {
     const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
     const [nomeBusca, setNomeBusca] = useState("");
     const [itens, setItens] = useState([]);
+
     const [paginaAtual, setPaginaAtual] = useState(1);
     const itensPorPagina = 8;
 
     const [openMenu, setOpenMenu] = useState(false);
 
+    //buscar categorias
+    useEffect(() => {
+        listarCategorias()
+            .then(res => setCategorias(res.data))
+            .catch(() => toast.error("Erro ao carregar categorias!"));
+    }, []);
+
+    //buscar itens por categorias
+    useEffect(() => {
+        if(!categoriaSelecionada) {
+            return;
+        }
+        listarItensPorCategoria(categoriaSelecionada)
+            .then(res => setItens(res.data))
+            .catch(() => toast.error("Erro ao carregar itens"));
+    }, [categoriaSelecionada]);
+
+    //buscar nome e categoria
     async function buscarNome(){
 
         if(!categoriaSelecionada){
-            alert("Selecione uma categoria para perquisar o nome do item!");
+            toast.error("Selecione uma categoria!");
             return;
         }
 
         if (nomeBusca.trim() === "") {
-            alert("Digite um nome para pesquisar.");
-            return;
+            toast.error("Digite um nome para pesquisar!");
+            return
         }
 
         const itensFiltrados = itens.filter(item =>
@@ -36,30 +59,22 @@ export default function Catalogo() {
         );
 
         if (itensFiltrados.length === 0) {
-            alert("Nenhum item encontrado com esse nome nessa categoria.");
+            toast.error("Nenhum item encontrado com esse nome nessa categoria.");
             return;
         }
 
-        setItens(itensFiltrados);
+        try{
+            const res = await buscarItemPorNomeECategoria(
+                nomeBusca,
+                categoriaSelecionada
+            );
+            setItens(itensFiltrados);
+        }catch {
+            toast.error("Nenhum item encontrado!");
+        }
+
         setPaginaAtual(1);
     }
-
-    useEffect(() => {
-        fetch("https://localhost:8080/categorias")
-            .then(res => res.json())
-            .then(data => setCategorias(data))
-            .catch(() => console.log("Erro ao carregar categorias"));
-    }, []);
-
-    useEffect(() => {
-        if(!categoriaSelecionada) 
-            return;
-
-        fetch(`http://localhost:8080/itens/categoria/${categoriaSelecionada}`)
-            .then(res => res.json())
-            .then(data => setItens(data))
-            .catch(() => console.log("Erro ao carregar itens"));
-    }, [categoriaSelecionada]);
 
     const inicio = (paginaAtual - 1) * itensPorPagina;
     const fim = inicio + itensPorPagina;
@@ -160,31 +175,7 @@ export default function Catalogo() {
                     <img className="logo-menu" src={logo} alt="Logo" />
                 </div>
 
-                <div className="menu-center">
-
-                    <div className="barra-pesquisa">
-                        <input type="text" placeholder="Buscar item por nome" value={nomeBusca} onChange={(e) => setNomeBusca(e.target.value)}/>
-
-                        <button onClick={buscarNome} className="btn-lupa">
-                            <FaSearch className="icon-lupa" />
-                        </button>
-                    </div>
-                </div>
-
                 <div className="menu-right">
-                    <div className="select-categorias">
-                        <select value={categoriaSelecionada} onChange={(e) => {
-                            setCategoriaSelecionada(e.target.value);
-                            setPaginaAtual(1);
-                        }}>
-                            <option value="">Categorias</option>
-                            {categorias.map(cat => (
-                                <option key={cat.id} value={cat.id}>
-                                    {cat.nome}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
                     <Link to="/cadastro-item" className="btn-cadastrar-item"> 
                         Criar item 
                         <FaShoppingBasket className="icon-cesta" />
@@ -203,6 +194,24 @@ export default function Catalogo() {
                     )}
                 </div>
             </nav>
+
+            <BarraPesquisa
+                nomeBusca={nomeBusca}
+                setNomeBusca={setNomeBusca}
+                categoriaSelecionada={categoriaSelecionada}
+                setCategoriaSelecionada={setCategoriaSelecionada}
+                categorias={categorias}
+                onBuscar={buscarNome}
+            />
+
+            <Select
+                value={categoriaSelecionada}
+                onChange={e => setCategoriaSelecionada(e.target.value)}
+                options={cate}
+                
+        
+      
+            />
 
             <section className="itens">
                 {itensPagina.map((item) => (
