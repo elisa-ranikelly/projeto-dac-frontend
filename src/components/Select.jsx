@@ -1,5 +1,3 @@
-import "./Select.css"
-
 const Select = ({value, onChange, required, options = [], placeholder}) => {
     return(
         <div className="input">

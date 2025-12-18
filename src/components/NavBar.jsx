@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import "./NavBar.css";
-import logo from "../assets/SacolaIf.png"
+import logo from "../assets/LetreiroBranco.png"
 
-function NavBar({links}) {
+function NavBar({links, usuario}) {
+
+    const perfilRoute = usuario?.role === "ADMIN" ? "perfil/admin" : "perfil-usuario";
+
     return (
         <nav className="nav-bar">
                 <Link to="/">

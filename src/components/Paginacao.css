@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.paginacao {
+    margin: 25px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+.paginacao button {
+    font-size: 1.8rem;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.paginacao button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.paginacao button:hover:not(:disabled) {
+    transform: scale(1.2);
+}
+
+.paginacao span {
+    font-size: 1.2rem;
+    font-weight: bold;
+}

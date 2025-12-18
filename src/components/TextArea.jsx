@@ -1,5 +1,3 @@
-import "./TextArea.css"
-
 const TextArea = ({
     placeholder,
     value,
