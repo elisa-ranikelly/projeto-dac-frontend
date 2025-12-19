@@ -11,6 +11,7 @@ import Paginacao from "../components/Paginacao.jsx";
 
 
 export default function Catalogo() {
+
     const [categorias, setCategorias] = useState([]);
     const [categoriaSelecionada, setCategoriaSelecionada] = useState("");
     const [nomeBusca, setNomeBusca] = useState("");
@@ -25,6 +26,7 @@ export default function Catalogo() {
 
     const totalPaginas = Math.ceil(itens.length / itensPorPagina);
 
+    const usuario = JSON.parse(localStorage.getItem("usuario") || "null");
 
     //buscar categorias
     useEffect(() => {
@@ -166,10 +168,11 @@ export default function Catalogo() {
     return (
         <article className="itens-container">
 
-            <NavBar links={[
-                {nome: "Criar item", to:"/cadastro-item"},
-                {nome: "Perfil", to:"/perfil-usuario"},
-                {nome: "Sair", to:"/"}
+            <NavBar 
+                usuario={usuario}
+                links={[
+                    {nome: "Criar item", to:"/cadastro-item"},
+                    {nome: "Sair", to:"/"}
             ]} />
 
             <BarraPesquisa

@@ -25,8 +25,10 @@ const Login = () => {
             const response = await login (email,senha);
 
             localStorage.setItem("usuario", JSON.stringify(response.data));
+            console.log("Login response:", response.data)
 
             toast.success("Login realizado com sucesso!");
+            console.log("Role:", response.data.roles);
 
             navigate("/catalogo");
         } catch (error){

@@ -51,7 +51,7 @@ const UsuarioForm = ({usuario, setUsuario, confirmarSenha, setConfirmarSenha, on
                         placeholder="Confirmar senha"
                         value={confirmarSenha}
                         required
-                        onChange={e => setUsuario({...usuario, setConfirmarSenha: e.target.value})} 
+                        onChange={e => setConfirmarSenha(e.target.value)} 
                     />
 
                     <button type="submit" className="btn">Cadastrar</button>

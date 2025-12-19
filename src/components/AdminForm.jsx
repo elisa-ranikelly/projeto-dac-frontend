@@ -42,7 +42,7 @@ const AdminForm = ({usuario, setUsuario, confirmarSenha, setConfirmarSenha, onSu
                         placeholder="Confirmar senha"
                         value={confirmarSenha}
                         required
-                        onChange={e => setUsuario({...usuario, setConfirmarSenha: e.target.value})} 
+                        onChange={e => setConfirmarSenha(e.target.value)} 
                     />
 
                     <button type="submit" className="btn">Cadastrar</button>

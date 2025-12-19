@@ -3,7 +3,7 @@ import UsuarioForm from "../components/UsuarioForm";
 import AdminForm from "../components/AdminForm"
 import api from "../services/api"
 import { toast } from "react-toastify";
-
+import { useSearchParams } from "react-router-dom";
 
 const CadastroUsuario = () => {
     

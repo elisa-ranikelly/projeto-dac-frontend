@@ -8,6 +8,9 @@ import CadastroUsuario from "./pages/CadastroUsuario";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Inicio from "./pages/Inicio"
+import PerfilAdmin from "./pages/PerfilAdmin"
+import PerfilUsuario from "./pages/PerfilUsuario"
+import AdminForm from "./components/AdminForm";
 
 
 function App() {
@@ -21,6 +24,8 @@ function App() {
           <Route path="/categoria" element={<Categoria />} />
           <Route path="/cadastro-item" element={<CadastroItem/>} />
           <Route path="/catalogo" element={<Catalogo />} />
+          <Route path="/perfil-usuario" element={<PerfilUsuario/>} />
+          <Route path="/perfil-admin" element={<PerfilAdmin/>} />
         </Routes>
       </div>
       <ToastContainer

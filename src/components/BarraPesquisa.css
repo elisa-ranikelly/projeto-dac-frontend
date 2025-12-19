@@ -74,3 +74,7 @@
 
     cursor: pointer;
 }
+
+.select-catalogo select:hover{
+    background-color: var(--cor3);
+}
