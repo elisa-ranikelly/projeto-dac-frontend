@@ -7,6 +7,7 @@ function PerfilAdmin() {
                 links={[
                     {nome: "Criar categoria", to:"/categoria"},
                     {nome: "Cadastrar admin", to:"/cadastro?tipo=admin"},
+                    {nome: "Catálogo", to:"/catalogo"},
                     {nome: "Sair", to:"/"}
             ]} />
         </article>

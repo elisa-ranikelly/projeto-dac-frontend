@@ -9,4 +9,12 @@ export function buscarItemPorNomeECategoria(nome, idCategoria) {
         params: {nome}
     })
 }
+
+export function criarItemMultipart(idUsuario, formData){
+    return api.post(`/api/negocia-if/itens/criar-item/${idUsuario}`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
        

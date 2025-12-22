@@ -13,9 +13,18 @@ const CadastroUsuario = () => {
         senha: "",
         telefone: "",
     });
-
     const [confirmarSenha, setConfirmarSenha] = useState("");
+
+    const [searchParams] = useSearchParams();
+    const tipoCadastro = searchParams.get("tipo");
+
     const [isPrimeiroUsuario, setIsPrimeiroUsuario] = useState(false);
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuario"));
+    const isAdminLogado = usuarioLogado?.roles?.includes("ADMIN");
+    const isCadastroAdmin = tipoCadastro === "admin";
+
+    const voltarPara = isPrimeiroUsuario ? "/" : "/perfil-admin"
+
 
     useEffect(() => {
         api.get("/api/negocia-if/usuarios/listar-usuarios")
@@ -60,13 +69,15 @@ const CadastroUsuario = () => {
 
     return (
             <div>
-                {isPrimeiroUsuario ? (
+                {(isPrimeiroUsuario || (isAdminLogado && isCadastroAdmin)) ? (
                 <AdminForm
                     usuario={usuario}
                     setUsuario={setUsuario}
                     confirmarSenha={confirmarSenha}
                     setConfirmarSenha={setConfirmarSenha}
-                    onSubmit={cadastrar} />
+                    onSubmit={cadastrar}
+                    voltarPara={voltarPara}
+                    />
                 ) : (
                 <UsuarioForm
                     usuario={usuario}
@@ -81,4 +92,4 @@ const CadastroUsuario = () => {
     )
 }
 
-export default CadastroUsuario
+export default CadastroUsuario;

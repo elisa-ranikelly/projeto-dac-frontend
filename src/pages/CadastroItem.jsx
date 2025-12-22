@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./CadastroItem.css";
 import "./media-queries/forms.css";
 import Input from "../components/Input";
 import Select from "../components/Select";
 import TextArea from "../components/TextArea";
+import { toast } from "react-toastify";
+
+import { criarItemMultipart } from "../services/itemService";
+import { listarCategorias } from "../services/categoriaService";
 
 const CadastroItem = () => {
 
@@ -12,11 +16,14 @@ const CadastroItem = () => {
     const [descricao, setDescricao] = useState("");
     const [statusDisponibilidade, setStatusDisponibilidade] = useState("");
     const [preco, setPreco] = useState("");
-    const [categoria, setCategoria] = useState("");
+    const [idCategoria, setIdCategoria] = useState("");
     const [fotos, setFotos] = useState([]);
 
     const [categorias, setCategorias] = useState([]);
 
+    const navigate = useNavigate();
+
+    // carregar categorias
     useEffect(() => {
         fetch("http://localhost:8080/categorias")
             .then(response => response.json())
@@ -24,6 +31,7 @@ const CadastroItem = () => {
             .catch(error => console.log("Erro ao carregar categorias", error));
     }, []);
 
+    //verifica disponibilidade
     const handleDisponibilidade = (value) => {
         setStatusDisponibilidade(value);
 
@@ -34,42 +42,68 @@ const CadastroItem = () => {
         }
     }
 
-    const cadastrarItem = (event) => {
+    async function cadastrarItem(event)  {
         event.preventDefault();
 
-        if(fotos.length === 0){
-            alert("Adicione pelo menos uma foto!");
+        const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+        if(!usuario) {
+            toast.error("Usuário não encontrado!")
             return;
         }
-
-        if(statusDisponibilidade === "DISPONIVEL_VENDA" && preco.trim() === ""){
-            alert("Preço é obrigatório para venda!");
-            return;
-        };
 
         const novoItem = {
             nome, 
             descricao, 
             statusDisponibilidade,
             preco: statusDisponibilidade === "DISPONIVEL_VENDA" ? preco : 0, 
-            categoria, 
-            fotos,
+            idCategoria, 
+            fotos
         };
 
-        console.log("Item cadastrado!");
+        const fd = new FormData();
+        fd.append(item,
+            new Blob([JSON.stringify(item)], {
+                type: "application/json"
+            })
+        );
 
-        setNome("");
-        setDescricao("");
-        setStatusDisponibilidade("");
-        setPreco("");
-        setCategoria("");
-        setFotos([]);
+        fotos.forEach((foto) => {
+            fd.append("fotos", fotos);
+        });
+
+        try{
+            await criarItemMultipart(usuario.id, fd);
+            toast.success("Item cadastrado com sucesso! Aguardando aprovação.");
+
+            setNome("");
+            setDescricao("");
+            setStatusDisponibilidade("");
+            setPreco("");
+            setIdCategoria("");
+            setFotos([]);
+
+            navigate("/catalogo");
+        } catch (error){
+            const message = error.response?.data?.message || toast.error("Erro ao cadastrar item!");
+        }
+
+        if(fotos.length === 0){
+            toast.error("Adicione pelo menos uma foto!");
+            return;
+        }
+
+        if(statusDisponibilidade === "DISPONIVEL_VENDA" && preco.trim() === ""){
+            toast.error("Preço é obrigatório para venda!");
+            return;
+        };
     };
 
-    const handleFotos = (event) => {
+    function handleFotos(event) {
         const arquivos = Array.from(event.target.files);
         setFotos(arquivos);
     };
+
 
     return (
         <article className="page-cadastro-item">
@@ -81,6 +115,7 @@ const CadastroItem = () => {
                         type="text"
                         placeholder="Nome do item"
                         required
+                        value={nome}
                         onChange={(e) => setNome(e.target.value)}
                     />
                         
@@ -94,6 +129,7 @@ const CadastroItem = () => {
                     <Select
                         required
                         placeholder="Selecione Disponibilidade"
+                        value={statusDisponibilidade}
                         onChange={(e) => handleDisponibilidade(e.target.value)}
                         options={[
                             {value : "DISPONIVEL_TROCA", label: "Disponível para troca"},
@@ -112,10 +148,10 @@ const CadastroItem = () => {
                     />
                     
                     <Select
-                        value={categoria}
+                        value={idCategoria}
                         required
                         placeholder="Selecione uma categoria"
-                        onChange={(e) => setCategoria(e.target.value)}
+                        onChange={(e) => setIdCategoria(e.target.value)}
                         options={categorias.map(cat => ({
                             value: cat.id,
                             label: cat.nome

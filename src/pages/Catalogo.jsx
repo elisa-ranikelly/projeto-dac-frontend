@@ -4,7 +4,7 @@ import Itens from "../components/ItemCard.jsx";
 import "./media-queries/catalogo-resp.css";
 import BarraPesquisa from "../components/BarraPesquisa.jsx";
 import {listarCategorias} from "../services/categoriaService.js"
-import { listarItensPorCategoria, buscarItemPorNomeECategoria } from "../services/ItemService.js";
+import { listarItensPorCategoria, buscarItemPorNomeECategoria } from "../services/itemService.js";
 import { toast } from "react-toastify";
 import NavBar from "../components/NavBar.jsx";
 import Paginacao from "../components/Paginacao.jsx";
@@ -27,6 +27,12 @@ export default function Catalogo() {
     const totalPaginas = Math.ceil(itens.length / itensPorPagina);
 
     const usuario = JSON.parse(localStorage.getItem("usuario") || "null");
+    const isAdmin = usuario?.roles?.includes("ADMIN");
+
+    const linksNavbar = [
+        !isAdmin && {nome: "Criar item", to: "/cadastro-item"},
+        {nome: "Sair", to: "/"}
+    ].filter(Boolean);
 
     //buscar categorias
     useEffect(() => {
@@ -170,10 +176,7 @@ export default function Catalogo() {
 
             <NavBar 
                 usuario={usuario}
-                links={[
-                    {nome: "Criar item", to:"/cadastro-item"},
-                    {nome: "Sair", to:"/"}
-            ]} />
+                links={linksNavbar} />
 
             <BarraPesquisa
                 nomeBusca={nomeBusca}

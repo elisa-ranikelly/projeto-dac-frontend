@@ -5,7 +5,7 @@ import LinkButton from "./LinkBtn"
 import Input from "./Input"
 
 
-const AdminForm = ({usuario, setUsuario, confirmarSenha, setConfirmarSenha, onSubmit}) => {
+const AdminForm = ({usuario, setUsuario, confirmarSenha, setConfirmarSenha, onSubmit, voltarPara}) => {
 
     return (
         <article className="page-cadastro">
@@ -47,7 +47,7 @@ const AdminForm = ({usuario, setUsuario, confirmarSenha, setConfirmarSenha, onSu
 
                     <button type="submit" className="btn">Cadastrar</button>
 
-                    <LinkButton to="/" text="Voltar" />
+                    <LinkButton to={voltarPara} text="Voltar" />
 
                     <div className="cadastro">
                         <p>Já possui uma conta? <Link to="/login">Faça Login</Link>
@@ -59,4 +59,4 @@ const AdminForm = ({usuario, setUsuario, confirmarSenha, setConfirmarSenha, onSu
     )
  }
 
- export default AdminForm
+ export default AdminForm;

@@ -5,7 +5,8 @@ function PerfilUsuario() {
         <article>
             <NavBar 
                 links={[
-                    {nome: "Criar item", to:"/cadastro-item"},
+                    {nome: "Meus itens", to:"/cadastro-item"},
+                    {nome: "Catálogo", to:"/catalogo"},
                     {nome: "Sair", to:"/"}
             ]} />
         </article>
