@@ -17,4 +17,8 @@ export function criarItemMultipart(idUsuario, formData){
         }
     });
 }
+
+export function listarItensPendentes(){
+    return api.get(`/api/negocia-if/itens/listar-itens-pendentes`);
+}
        

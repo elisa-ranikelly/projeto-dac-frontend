@@ -3,15 +3,29 @@ import { Link } from "react-router-dom";
 import "./Categoria.css";
 import "./media-queries/forms.css";
 import Input from "../components/Input";
+import { criarCategoria } from "../services/categoriaService";
+import { toast } from "react-toastify";
 
 const Categoria = () => {
     const [nomeCategoria, setNomeCategoria] = useState("");
 
-    const cadastrarCategoria = (event) => {
+    const cadastrarCategoria = async(event) => {
         event.preventDefault();
         
-        console.log("Cadastro realizado");
-    }
+        if(nomeCategoria.trim() === "") {
+            toast.error("O nome da categoria não pode estar vazio!");
+            return;
+        }
+
+        try {
+            await criarCategoria({ nome: nomeCategoria });
+            toast.success("Categoria cadastrada com sucesso!");
+            setNomeCategoria("");
+        } catch (error) {
+            const mensagemErro = error.response?.data?.message || "Erro ao cadastrar categoria!";
+            toast.error(mensagemErro);
+        }
+    };
 
   return (
     <article className="page-cadastro-categoria">
@@ -23,7 +37,8 @@ const Categoria = () => {
                     type="text"
                     placeholder="Categoria" 
                     required
-                    onChange={(e) => setNomeCategoria} 
+                    value={nomeCategoria}
+                    onChange={(e) => setNomeCategoria(e.target.value)} 
                 />
 
                 <button type="submit" className="btn">Cadastrar</button>

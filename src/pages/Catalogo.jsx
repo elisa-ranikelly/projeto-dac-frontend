@@ -38,7 +38,7 @@ export default function Catalogo() {
     useEffect(() => {
         listarCategorias()
             .then(res => setCategorias(res.data))
-            //.catch(() => toast.error("Erro ao carregar categorias!"));
+            .catch(() => toast.error("Erro ao carregar categorias!"));
     }, []);
 
     //buscar itens por categorias

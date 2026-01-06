@@ -25,10 +25,9 @@ const CadastroItem = () => {
 
     // carregar categorias
     useEffect(() => {
-        fetch("http://localhost:8080/categorias")
-            .then(response => response.json())
-            .then(data => setCategorias(data))
-            .catch(error => console.log("Erro ao carregar categorias", error));
+        listarCategorias()
+            .then(res => setCategorias(res.data))
+            .catch(() => toast.error("Erro ao carregar categorias!"));
     }, []);
 
     //verifica disponibilidade
@@ -52,24 +51,33 @@ const CadastroItem = () => {
             return;
         }
 
+        if(fotos.length === 0){
+            toast.error("Adicione pelo menos uma foto!");
+            return;
+        }
+
+        if(statusDisponibilidade === "DISPONIVEL_VENDA" && preco.trim() === ""){
+            toast.error("Preço é obrigatório para venda!");
+            return;
+        };
+
         const novoItem = {
             nome, 
             descricao, 
             statusDisponibilidade,
             preco: statusDisponibilidade === "DISPONIVEL_VENDA" ? preco : 0, 
-            idCategoria, 
-            fotos
+            idCategoria: Number(idCategoria), 
         };
 
         const fd = new FormData();
-        fd.append(item,
-            new Blob([JSON.stringify(item)], {
+        fd.append("item",
+            new Blob([JSON.stringify(novoItem)], {
                 type: "application/json"
             })
         );
 
-        fotos.forEach((foto) => {
-            fd.append("fotos", fotos);
+        fotos.forEach(foto => {
+            fd.append("fotos", foto);
         });
 
         try{
@@ -85,18 +93,9 @@ const CadastroItem = () => {
 
             navigate("/catalogo");
         } catch (error){
-            const message = error.response?.data?.message || toast.error("Erro ao cadastrar item!");
+            const mensagemErro = error.response?.data?.message || "Erro ao cadastrar item!";
+            toast.error(mensagemErro);
         }
-
-        if(fotos.length === 0){
-            toast.error("Adicione pelo menos uma foto!");
-            return;
-        }
-
-        if(statusDisponibilidade === "DISPONIVEL_VENDA" && preco.trim() === ""){
-            toast.error("Preço é obrigatório para venda!");
-            return;
-        };
     };
 
     function handleFotos(event) {

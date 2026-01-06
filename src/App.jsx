@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Inicio from "./pages/Inicio"
 import PerfilAdmin from "./pages/PerfilAdmin"
 import PerfilUsuario from "./pages/PerfilUsuario"
-import AdminForm from "./components/AdminForm";
+import ItensPendentes from "./pages/ItensPendentes";
 
 
 function App() {
@@ -26,6 +26,7 @@ function App() {
           <Route path="/catalogo" element={<Catalogo />} />
           <Route path="/perfil-usuario" element={<PerfilUsuario/>} />
           <Route path="/perfil-admin" element={<PerfilAdmin/>} />
+          <Route path="/itens-pendentes" element={<ItensPendentes/>} />
         </Routes>
       </div>
       <ToastContainer
