@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+h1 {
+    margin: 25px 0;
+    text-align: center;
+    color: var(--cor3);
+    font-size: 2em;
+}
+
+.mensagem-vazia {
+    margin: auto;
+    width: 300px;
+    padding: 10px;
+    border: 2px solid white;
+    text-align: center;
+    color: var(--cor3);
+    font-size: 1.1em;   
+}
+
+.lista-itens {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+}
+
+@media (max-width: 1000px) {
+    .lista-itens {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .lista-itens {
+        grid-template-columns: 1fr;
+    }
+}

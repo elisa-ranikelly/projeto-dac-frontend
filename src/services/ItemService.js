@@ -21,4 +21,15 @@ export function criarItemMultipart(idUsuario, formData){
 export function listarItensPendentes(){
     return api.get(`/api/negocia-if/itens/listar-itens-pendentes`);
 }
-       
+
+export function listarItensAprovados(){
+    return api.get(`/api/negocia-if/itens/listar-itens-aprovados`);
+}
+
+export function aprovarItem(id){
+    return api.put(`/api/negocia-if/itens/aprovar-item/${id}`);
+}
+
+export function reprovarItem(id, data){
+    return api.put(`/api/negocia-if/itens/reprovar-item/${id}`, data);
+}

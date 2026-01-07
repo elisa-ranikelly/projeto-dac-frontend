@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
-import { AiOutlineLike, AiOutlineDislike } from "react-icons/ai";
-import { FaRegHandshake, FaWhatsapp } from "react-icons/fa";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaWhatsapp } from "react-icons/fa";
 import "./ItemCard.css";
+import ItemFoto from "./ItemFoto";
 
 export default function Itens({item}){
 
     function entrarEmContato(){
+        
         let numero = item.telefone || "";
         numero = numero.replace(/\D/g, "");
 
@@ -32,7 +31,8 @@ export default function Itens({item}){
         <article className="item-card">
             <section className="imagem-item">
                 {item.fotos && item.fotos.length > 0 ? (
-                    <img src={item.fotos[0]} alt={item.nome} />
+                    <ItemFoto src={`http://localhost:8080${item.fotos?.[0]?.url}`} 
+                    alt={item.nome} />
                 ) : (
                     <div className="sem-imagem">Imagem</div>
                 )}

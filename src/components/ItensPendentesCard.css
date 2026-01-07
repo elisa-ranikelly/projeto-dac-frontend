@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+.item-pendente-card {
+    width: 450px;
+    border: 2px solid var(--cor3);
+    border-radius: 12px;
+    margin: 30px;
+    padding: 15px;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.096);
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.item-pendente-card:hover {
+    transform: scale(1.02);
+}
+
+.textos p {
+    padding-top: 5px;
+    color: rgb(67, 53, 53);
+}
+
+strong{
+    color: rgb(11, 67, 11);
+}
+
+.acoes {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.icon-aprovar{
+    color: green;
+    margin-right: 10px;
+}
+
+.icon-reprovar{
+    color: red;
+    margin-right: 10px;
+}

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import "./Catalogo.css";
 import Itens from "../components/ItemCard.jsx";
 import "./media-queries/catalogo-resp.css";
 import BarraPesquisa from "../components/BarraPesquisa.jsx";
 import {listarCategorias} from "../services/categoriaService.js"
-import { listarItensPorCategoria, buscarItemPorNomeECategoria } from "../services/itemService.js";
+import { listarItensPorCategoria, buscarItemPorNomeECategoria, listarItensAprovados } from "../services/itemService.js";
 import { toast } from "react-toastify";
 import NavBar from "../components/NavBar.jsx";
 import Paginacao from "../components/Paginacao.jsx";
@@ -26,6 +26,7 @@ export default function Catalogo() {
 
     const totalPaginas = Math.ceil(itens.length / itensPorPagina);
 
+    //verificar se é admin ou usuario comum
     const usuario = JSON.parse(localStorage.getItem("usuario") || "null");
     const isAdmin = usuario?.roles?.includes("ADMIN");
 
@@ -42,14 +43,14 @@ export default function Catalogo() {
     }, []);
 
     //buscar itens por categorias
-    useEffect(() => {
+    /*useEffect(() => {
         if(!categoriaSelecionada) {
             return;
         }
         listarItensPorCategoria(categoriaSelecionada)
             .then(res => setItens(res.data))
             .catch(() => toast.error("Erro ao carregar itens"));
-    }, [categoriaSelecionada]);
+    }, [categoriaSelecionada]);*/
 
     //buscar nome e categoria
     async function buscarNome(){
@@ -87,96 +88,30 @@ export default function Catalogo() {
     }
 
     useEffect(() => {
-
-        const itensAprovadosSimulados = [
-            {
-                id: 1,
-                nome: "Kit de canetas",
-                descricao: "Kit de canetas azuis novo com 15 unidades.",
-                statusDisponibilidade: "DISPONIVEL_VENDA",
-                preco: 15.0,
-                telefone: "(83) 99999-9999",
-                fotos: ""
-            },
-            {
-                id: 2,
-                nome: "Notebook Samsung",
-                descricao: "Semi-novo, 8GB RAM",
-                statusDisponibilidade: "DISPONIVEL_TROCA",
-                telefone: "(81) 88888-8888",
-                fotos: ""
-            },
-            {
-                id: 3,
-                nome: "Notebook Samsung",
-                descricao: "Semi-novo, 8GB RAM",
-                statusDisponibilidade: "DISPONIVEL_TROCA",
-                telefone: "(81) 88888-8888",
-                fotos: ""
-            },
-            {
-                id: 4,
-                nome: "Kit de canetas",
-                descricao: "Kit de canetas azuis novo com 15 unidades.",
-                statusDisponibilidade: "DISPONIVEL_VENDA",
-                preco: 15.0,
-                telefone: "(83) 99999-9999",
-                fotos: ""
-            },
-            {
-                id: 5,
-                nome: "Notebook Samsung",
-                descricao: "Semi-novo, 8GB RAM",
-                statusDisponibilidade: "DISPONIVEL_TROCA",
-                telefone: "(81) 88888-8888",
-                fotos: ""
-            },
-            {
-                id: 6,
-                nome: "Kit de canetas",
-                descricao: "Kit de canetas azuis novo com 15 unidades.",
-                statusDisponibilidade: "DISPONIVEL_VENDA",
-                preco: 15.0,
-                telefone: "(83) 99999-9999",
-                fotos: ""
-            },
-            {
-                id: 7,
-                nome: "Notebook Samsung",
-                descricao: "Semi-novo, 8GB RAM",
-                statusDisponibilidade: "DISPONIVEL_TROCA",
-                telefone: "(81) 88888-8888",
-                fotos: ""
-            },
-            {
-                id: 8,
-                nome: "Notebook Samsung",
-                descricao: "Semi-novo, 8GB RAM",
-                statusDisponibilidade: "DISPONIVEL_TROCA",
-                telefone: "(81) 88888-8888",
-                fotos: ""
-            },
-            {
-                id: 9,
-                nome: "Kit de canetas",
-                descricao: "Kit de canetas azuis novo com 15 unidades.",
-                statusDisponibilidade: "DISPONIVEL_VENDA",
-                preco: 15.0,
-                telefone: "(83) 99999-9999",
-                fotos: ""   
+        async function carregarItens() {
+            try {
+                if (!categoriaSelecionada) {
+                    const res = await listarItensAprovados();
+                    setItens(res.data);
+                }else {
+                    const res = await listarItensPorCategoria(categoriaSelecionada);
+                    setItens(res.data);
+                }
+            } catch {
+                const mensagemErro = error.response?.data?.message || "Erro ao verificar itens pendentes!";
+                toast.error(mensagemErro);
             }
+        }
+        carregarItens();
+    }, [categoriaSelecionada]);
 
-        ];   
-
-        setItens(itensAprovadosSimulados);
-    }, []);
 
     return (
         <article className="itens-container">
 
-            <NavBar 
-                usuario={usuario}
-                links={linksNavbar} />
+            <NavBar
+                links={linksNavbar}
+                usuario={usuario}/>
 
             <BarraPesquisa
                 nomeBusca={nomeBusca}
