@@ -25,8 +25,6 @@ export default function Itens({item}){
         .toFixed(2)
         .replace(".", ",");
 
-
-
     return(
         <article className="item-card">
             <section className="imagem-item">

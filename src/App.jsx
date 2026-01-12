@@ -11,7 +11,8 @@ import Inicio from "./pages/Inicio"
 import PerfilAdmin from "./pages/PerfilAdmin"
 import PerfilUsuario from "./pages/PerfilUsuario"
 import ItensPendentes from "./pages/ItensPendentes";
-
+import MeusItens from "./pages/MeusItens";
+import EditarItem from "./pages/EditarItem";
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
           <Route path="/perfil-usuario" element={<PerfilUsuario/>} />
           <Route path="/perfil-admin" element={<PerfilAdmin/>} />
           <Route path="/itens-pendentes" element={<ItensPendentes/>} />
+          <Route path="/meus-itens" element={<MeusItens/>} />
+          <Route path="/editar-item/:id" element={<EditarItem/>} />
         </Routes>
       </div>
       <ToastContainer

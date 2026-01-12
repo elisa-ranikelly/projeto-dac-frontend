@@ -33,21 +33,20 @@ function ItensPendentes() {
         <div>
             <h1>Itens Pendentes</h1>
         </div>
-        <div className="itens-pendentes-container">
-            {itens.length === 0 ? (
-                <p className="mensagem-vazia">Não há itens pendentes no momento!</p>
-            ) : (
-                <div className="lista-itens">
-                    {itens.map((item) => (
-                        <ItensPendentesCard
-                            key={item.id}
-                            item={item}
-                            recarregarItens={buscarItensPendentes}
-                        />
-                    ))}
-                </div>
-            )}
+        {itens.length === 0 ? (
+            <p className="mensagem-vazia">Não há itens pendentes no momento!</p>
+        ) : (
+            
+        <div>
+            {itens.map((item) => (
+                <ItensPendentesCard
+                    key={item.id}
+                    item={item}
+                    recarregarItens={buscarItensPendentes}
+                />
+            ))}
         </div>
+        )}
     </section>
   );
 }

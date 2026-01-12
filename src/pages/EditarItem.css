@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.editar-item-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.form-editar-item{
+    width: 600px;
+    background-color: #0c492a48;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.271);
+    padding: 25px;
+}
+
+.foto-item{
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.btn.btn-remover{
+    width: auto;
+    padding: 5px 10px;
+    background-color: red;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+
+    gap: 5px;
+}
+
+

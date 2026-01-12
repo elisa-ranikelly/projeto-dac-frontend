@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+.meus-itens-card {
+    width: 85%;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid var(--cor3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.189);
+    align-items: center;
+  
+}
+
+.meus-itens-card .imagem {
+    width: 140px;
+    flex-shrink: 0;
+}
+
+.meus-itens-card .informacoes {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+}
+
+.meus-itens-card .acoes {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 6px;
+    margin-left: auto;
+}
+
+.meus-itens-card .btn {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+    width: 150px;
+
+    transition: transform 0.2s;
+}
+
+.meus-itens-card .motivo-reprovacao strong{
+    color: rgb(156, 9, 9);
+}
+
+.meus-itens-card .btn:hover {
+    transform: scale(1.08);
+}
+
+.meus-itens-card .btn .btn-aprovar {
+    background-color: blue;
+    color: white;
+}
+
+.meus-itens-card .btn-editar {
+    background-color: blue;
+    color: white;
+}
+
+.meus-itens-card .btn-excluir {
+    background-color: red;
+    color: white;
+}
+
+.meus-itens-card .btn-status {
+    background-color: green;
+    color: white;
+}
+
+.meus-itens-card .icone {
+    margin-right: 6px;
+}

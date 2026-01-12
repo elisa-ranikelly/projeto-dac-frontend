@@ -1,5 +1,9 @@
 import api from "./api"
 
+export function buscarItemPorId(id){
+    return api.get(`/api/negocia-if/itens/buscar-item/${id}`);
+}
+
 export function listarItensPorCategoria(idCategoria){
     return api.get(`/api/negocia-if/itens/listar-item-categoria/${idCategoria}`);
 }
@@ -18,6 +22,18 @@ export function criarItemMultipart(idUsuario, formData){
     });
 }
 
+export function atualizarItemMultipart(idItem, formData){
+    return api.put(`/api/negocia-if/itens/atualizar-item/${idItem}`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    });
+}
+
+export function listarMeusItens(idUsuario){
+    return api.get(`/api/negocia-if/itens/listar-meus-itens/${idUsuario}`);
+}
+
 export function listarItensPendentes(){
     return api.get(`/api/negocia-if/itens/listar-itens-pendentes`);
 }
@@ -32,4 +48,16 @@ export function aprovarItem(id){
 
 export function reprovarItem(id, data){
     return api.put(`/api/negocia-if/itens/reprovar-item/${id}`, data);
+}
+
+export function excluirItem(id){
+    return api.delete(`/api/negocia-if/itens/excluir-item/${id}`);
+}
+
+export function marcarItemComoVendido(id){
+    return api.put(`/api/negocia-if/itens/marcar-como-vendido/${id}`);
+}
+
+export function marcarItemComoTrocado(id){
+    return api.put(`/api/negocia-if/itens/marcar-como-trocado/${id}`);
 }
