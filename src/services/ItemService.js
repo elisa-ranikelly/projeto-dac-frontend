@@ -42,6 +42,20 @@ export function listarItensAprovados(){
     return api.get(`/api/negocia-if/itens/listar-itens-aprovados`);
 }
 
+export function listarItensCatalogo(){
+    return api.get(`/api/negocia-if/itens/catalogo`);
+}
+
+export function listarItensCatalogoPorCategoria(idCategoria){
+    return api.get(`/api/negocia-if/itens/catalogo/categoria/${idCategoria}`);
+}
+
+export function buscarItensCatalogoPorNomeECategoria(nome, idCategoria){
+    return api.get(`/api/negocia-if/itens/catalogo/buscar`, {
+        params: {nome, idCategoria}
+    });
+}
+
 export function aprovarItem(id){
     return api.put(`/api/negocia-if/itens/aprovar-item/${id}`);
 }
@@ -55,9 +69,9 @@ export function excluirItem(id){
 }
 
 export function marcarItemComoVendido(id){
-    return api.put(`/api/negocia-if/itens/marcar-como-vendido/${id}`);
+    return api.put(`/api/negocia-if/itens/item-vendido/${id}`);
 }
 
 export function marcarItemComoTrocado(id){
-    return api.put(`/api/negocia-if/itens/marcar-como-trocado/${id}`);
+    return api.put(`/api/negocia-if/itens/item-trocado/${id}`);
 }

@@ -4,11 +4,10 @@ import Itens from "../components/ItemCard.jsx";
 import "./media-queries/catalogo-resp.css";
 import BarraPesquisa from "../components/BarraPesquisa.jsx";
 import {listarCategorias} from "../services/categoriaService.js"
-import { listarItensPorCategoria, buscarItemPorNomeECategoria, listarItensAprovados } from "../services/itemService.js";
 import { toast } from "react-toastify";
 import NavBar from "../components/NavBar.jsx";
 import Paginacao from "../components/Paginacao.jsx";
-
+import { listarItensCatalogo, listarItensCatalogoPorCategoria, buscarItensCatalogoPorNome } from "../services/itemService.js";
 
 export default function Catalogo() {
 
@@ -42,62 +41,47 @@ export default function Catalogo() {
             .catch(() => toast.error("Erro ao carregar categorias!"));
     }, []);
 
-    //buscar itens por categorias
-    /*useEffect(() => {
-        if(!categoriaSelecionada) {
-            return;
-        }
-        listarItensPorCategoria(categoriaSelecionada)
-            .then(res => setItens(res.data))
-            .catch(() => toast.error("Erro ao carregar itens"));
-    }, [categoriaSelecionada]);*/
-
     //buscar nome e categoria
     async function buscarNome(){
 
-        if(!categoriaSelecionada){
-            toast.error("Selecione uma categoria!");
-            return;
-        }
-
         if (nomeBusca.trim() === "") {
             toast.error("Digite um nome para pesquisar!");
-            return
-        }
-
-        const itensFiltrados = itens.filter(item =>
-            item.nome.toLowerCase().includes(nomeBusca.toLowerCase())
-        );
-
-        if (itensFiltrados.length === 0) {
-            toast.error("Nenhum item encontrado com esse nome nessa categoria.");
             return;
         }
 
-        try{
-            const res = await buscarItemPorNomeECategoria(
-                nomeBusca,
-                categoriaSelecionada
-            );
-            setItens(itensFiltrados);
-        }catch {
-            toast.error("Nenhum item encontrado!");
-        }
+        try {
+            let res;
+            if(categoriaSelecionada){
+                res = await buscarItensCatalogoPorNome(nomeBusca, categoriaSelecionada);
+            }else{
+                res = await buscarItensCatalogoPorNome(nomeBusca);
+            }
 
-        setPaginaAtual(1);
+            if(res.data.length === 0){
+                toast.error("Nenhum item encontrado com esse nome!");
+                return;
+            }
+
+            setItens(res.data);
+            setPaginaAtual(1);
+        } catch (error) {
+            const mensagemErro = error.response?.data?.message || "Erro ao realizar busca do item!";
+            toast.error(mensagemErro);
+        }
     }
 
     useEffect(() => {
         async function carregarItens() {
             try {
+                let res;
                 if (!categoriaSelecionada) {
-                    const res = await listarItensAprovados();
-                    setItens(res.data);
+                    res = await listarItensCatalogo();
                 }else {
-                    const res = await listarItensPorCategoria(categoriaSelecionada);
-                    setItens(res.data);
+                    res = await listarItensCatalogoPorCategoria(categoriaSelecionada);
                 }
-            } catch {
+                setItens(res.data);
+                setPaginaAtual(1);
+            } catch (error){
                 const mensagemErro = error.response?.data?.message || "Erro ao verificar itens pendentes!";
                 toast.error(mensagemErro);
             }
@@ -121,7 +105,9 @@ export default function Catalogo() {
                 categorias={categorias}
                 onBuscar={buscarNome}
             />
-
+            {itens.length === 0 && (
+                <p className="mensagem-vazia">Não há itens disponíveis no momento!</p>
+            )}
             <section className="itens">
                 {itensPagina.map((item) => (
                     <Itens key={item.id} item={item} />

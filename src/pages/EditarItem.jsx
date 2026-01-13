@@ -28,8 +28,13 @@ const EditarItem = () => {
             try{
                 const itemResponse = await buscarItemPorId(id);
                 const categoriasResponse = await listarCategorias();
+                const itemData = itemResponse.data;
 
-                setItem(itemResponse.data);
+                setItem({
+                    ...itemData,
+                    idCategoria: itemData.idCategoria ?? itemData.categoriaId
+                });
+
                 setCategorias(categoriasResponse.data);
             } catch (error) {
                 const mensagemErro = error.response?.data?.mensagem || "Erro ao carregar dados do item.";
@@ -60,7 +65,23 @@ const EditarItem = () => {
 
         const formData = new FormData();
 
+        const itemAtualizado = {
+            nome: item.nome,
+            descricao: item.descricao,
+            statusDisponibilidade: item.statusDisponibilidade,
+            idCategoria: item.idCategoria
+        };
+
+        if(item.statusDisponibilidade === "DISPONIVEL_VENDA"){
+            itemAtualizado.preco = Number(item.preco);
+        }
+
         formData.append(
+            "item",
+            new Blob([JSON.stringify(itemAtualizado)], { type: "application/json" })
+        );
+
+        /*formData.append(
             "item",
             new Blob([JSON.stringify({
                 nome: item.nome,
@@ -69,15 +90,18 @@ const EditarItem = () => {
                 preco: item.statusDisponibilidade === "DISPONIVEL_TROCA" ? null : item.preco,
                 idCategoria: item.idCategoria
             })], { type: "application/json" })
-        );
+        );*/
 
         novasFotos.forEach(foto => {
             formData.append("novasFotos", foto);
         });
 
-        idsFotosRemovidas.forEach(idFoto => {
-            formData.append("idsFotosRemovidas", idFoto);
-        });
+        if(idsFotosRemovidas.length > 0){
+            formData.append(
+                "idsFotosRemovidas",
+                new Blob([JSON.stringify(idsFotosRemovidas)], { type: "application/json" })
+            );
+        }
 
         try{
             await atualizarItemMultipart(id, formData);
@@ -118,7 +142,7 @@ const EditarItem = () => {
                     <div key={foto.id} className="foto-item">
                         <FotoItem src={`http://localhost:8080${foto.url}`} alt="Foto do item" />
 
-                        <button type="button" className="btn btn-remover" onClick={() => removerFotoExistente(foto.id)}> <FaTrash className="icone"/> Remover
+                        <button type="button" className="btn btn-remover" onClick={() => removerFotoExistente(foto.id)}> <FaTrash className="icone"/> Remover foto
                         </button>
                     </div>
                 ))}
@@ -152,23 +176,25 @@ const EditarItem = () => {
                 <Input
                     type="number"
                     placeholder="Preço"
-                    value={item.statusDisponibilidade === "DISPONIVEL_TROCA" ? "" : item.preco}
+                    value={item.statusDisponibilidade === "DISPONIVEL_TROCA" ? "" : item.preco ?? ""}
                     min={0}
                     required={item.statusDisponibilidade === "DISPONIVEL_VENDA"}
                     disabled={item.statusDisponibilidade === "DISPONIVEL_TROCA"}
                     onChange={e => setItem({...item, preco: e.target.value})}
                 />
                 
-                <Select
-                    value={item.idCategoria}
-                    placeholder="Selecione uma categoria"
-                    disabled={item.statusAprovacao === "APROVADO"}
-                    onChange={e => setItem({...item, idCategoria: e.target.value})}
-                    options={categorias.map(cat => ({
-                            value: cat.id,
-                            label: cat.nome
-                    }))}
-                />
+                {item.statusAprovacao !== "APROVADO" && (
+                    <Select
+                        value={item.idCategoria}
+                        placeholder="Selecione uma categoria"
+                        disabled={item.statusAprovacao === "APROVADO"}
+                        onChange={e => setItem({...item, idCategoria: e.target.value})}
+                        options={categorias.map(cat => ({
+                                value: cat.id,
+                                label: cat.nome
+                        }))}
+                    />
+                )}
                 
                 <Input
                     type="file"

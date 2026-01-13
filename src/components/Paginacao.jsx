@@ -2,7 +2,7 @@ import { FaArrowCircleLeft, FaArrowCircleRight } from "react-icons/fa";
 import "./Paginacao.css";
 
 function Paginacao({paginaAtual, totalPaginas, onPageChange}) {
-    if(totalPaginas <= 1){
+    if(totalPaginas === 0){
         return null;
     }
 
