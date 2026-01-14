@@ -1,6 +1,8 @@
 import { FaWhatsapp } from "react-icons/fa";
 import "./ItemCard.css";
 import ItemFoto from "./ItemFoto";
+import CarroselFotos from "./CarroselFotos";
+import { useState } from "react";
 
 export default function Itens({item}){
 
@@ -25,16 +27,30 @@ export default function Itens({item}){
         .toFixed(2)
         .replace(".", ",");
 
+    const [fotoIndex, setFotoIndex] = useState(0);
+
     return(
         <article className="item-card">
             <section className="imagem-item">
                 {item.fotos && item.fotos.length > 0 ? (
-                    <ItemFoto src={`http://localhost:8080${item.fotos?.[0]?.url}`} 
+                    <ItemFoto src={`http://localhost:8080${item.fotos[fotoIndex].url}`} 
                     alt={item.nome} />
                 ) : (
                     <div className="sem-imagem">Imagem</div>
                 )}
             </section>
+
+            
+            {item.fotos && item.fotos.length > 1 && (
+                <section className="controle-carrosel">
+                    <CarroselFotos
+                        total={item.fotos.length}
+                        indexAtual={fotoIndex}
+                        onChange={setFotoIndex}
+                    />
+                </section>
+            )}
+           
 
             <section className="item-conteudo">
 

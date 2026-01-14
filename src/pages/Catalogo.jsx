@@ -7,7 +7,7 @@ import {listarCategorias} from "../services/categoriaService.js"
 import { toast } from "react-toastify";
 import NavBar from "../components/NavBar.jsx";
 import Paginacao from "../components/Paginacao.jsx";
-import { listarItensCatalogo, listarItensCatalogoPorCategoria, buscarItensCatalogoPorNome } from "../services/itemService.js";
+import { listarItensCatalogo, listarItensCatalogoPorCategoria, listarItensCatalogoPorNome, listarItensCatalogoPorNomeECategoria } from "../services/itemService.js";
 
 export default function Catalogo() {
 
@@ -28,9 +28,11 @@ export default function Catalogo() {
     //verificar se é admin ou usuario comum
     const usuario = JSON.parse(localStorage.getItem("usuario") || "null");
     const isAdmin = usuario?.roles?.includes("ADMIN");
+    const perfilRoute = isAdmin ? "/perfil-admin" : "/perfil-usuario";
 
     const linksNavbar = [
         !isAdmin && {nome: "Criar item", to: "/cadastro-item"},
+        usuario && {nome: "Perfil", to: perfilRoute},
         {nome: "Sair", to: "/"}
     ].filter(Boolean);
 
@@ -51,19 +53,21 @@ export default function Catalogo() {
 
         try {
             let res;
+
             if(categoriaSelecionada){
-                res = await buscarItensCatalogoPorNome(nomeBusca, categoriaSelecionada);
+                res = await listarItensCatalogoPorNomeECategoria(categoriaSelecionada, nomeBusca);
             }else{
-                res = await buscarItensCatalogoPorNome(nomeBusca);
+                res = await listarItensCatalogoPorNome(nomeBusca);
             }
 
             if(res.data.length === 0){
-                toast.error("Nenhum item encontrado com esse nome!");
+                toast.error("Nenhum item encontrado com esse nome nessa categoria!");
                 return;
             }
 
             setItens(res.data);
             setPaginaAtual(1);
+            setNomeBusca("");
         } catch (error) {
             const mensagemErro = error.response?.data?.message || "Erro ao realizar busca do item!";
             toast.error(mensagemErro);

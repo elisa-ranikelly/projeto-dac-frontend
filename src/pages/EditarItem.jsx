@@ -81,17 +81,6 @@ const EditarItem = () => {
             new Blob([JSON.stringify(itemAtualizado)], { type: "application/json" })
         );
 
-        /*formData.append(
-            "item",
-            new Blob([JSON.stringify({
-                nome: item.nome,
-                descricao: item.descricao,
-                statusDisponibilidade: item.statusDisponibilidade,
-                preco: item.statusDisponibilidade === "DISPONIVEL_TROCA" ? null : item.preco,
-                idCategoria: item.idCategoria
-            })], { type: "application/json" })
-        );*/
-
         novasFotos.forEach(foto => {
             formData.append("novasFotos", foto);
         });

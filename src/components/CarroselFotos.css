@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+.controle-carrossel {
+    padding: 6px 0;
+    width: 100%;
+    height: 36px; /* espaço só para os controles */
+    display: flex;
+    align-items: center;
+}
+
+.swiper-controle {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-controle .swiper-button-next,
+.swiper-controle .swiper-button-prev {
+    color: var(--cor1);
+    width: 24px;
+    height: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.swiper-controle .swiper-button-prev::after,
+.swiper-controle .swiper-button-next::after {
+    font-size: 20px;
+}
+
+/* Paginação (bolinhas) */
+.swiper-controle .swiper-pagination {
+    bottom: 0;
+}
+
+.swiper-controle .swiper-pagination-bullet {
+    background: #bbb;
+    opacity: 1;
+}
+
+.swiper-controle .swiper-pagination-bullet-active {
+    background: var(--cor1);
+}

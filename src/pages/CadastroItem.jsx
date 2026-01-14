@@ -167,7 +167,7 @@ const CadastroItem = () => {
                     
                     <button type="submit" className="btn">Cadastrar</button>
 
-                    <Link to={"/catalogo"} className="btn">Catálogo</Link>
+                    <Link to={"/catalogo"} className="btn">Voltar</Link>
 
                 </form>
             </section>

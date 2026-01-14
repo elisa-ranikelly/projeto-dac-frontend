@@ -50,9 +50,15 @@ export function listarItensCatalogoPorCategoria(idCategoria){
     return api.get(`/api/negocia-if/itens/catalogo/categoria/${idCategoria}`);
 }
 
-export function buscarItensCatalogoPorNomeECategoria(nome, idCategoria){
-    return api.get(`/api/negocia-if/itens/catalogo/buscar`, {
-        params: {nome, idCategoria}
+export function listarItensCatalogoPorNomeECategoria(idCategoria, nome){
+    return api.get(`/api/negocia-if/itens/catalogo/busca/categoria`, {
+        params: {idCategoria, nome}
+    });
+}
+
+export function listarItensCatalogoPorNome(nome){
+    return api.get(`/api/negocia-if/itens/catalogo/busca/nome`, {
+        params: {nome}
     });
 }
 
