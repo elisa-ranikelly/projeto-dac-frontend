@@ -25,7 +25,6 @@ const CadastroUsuario = () => {
 
     const voltarPara = isPrimeiroUsuario ? "/" : "/perfil-admin"
 
-
     useEffect(() => {
         api.get("/api/negocia-if/usuarios/listar-usuarios")
         .then(resp => {
@@ -46,8 +45,29 @@ const CadastroUsuario = () => {
              return
         }
 
+        let tipoUsuario = "USER";
+
+        if(isPrimeiroUsuario || (isAdminLogado && isCadastroAdmin)){
+            tipoUsuario = "ADMIN";
+        }
+
+        const payload = {
+            nome: usuario.nome,
+            email: usuario.email,
+            senha: usuario.senha,
+            tipoUsuario
+        };
+
+        if(tipoUsuario === "USER") {
+            if(!usuario.telefone || usuario.telefone.trim() === ""){
+                toast.error("Telefone é obrigatório para usuários comuns!");
+                return;
+            }
+            payload.telefone = usuario.telefone;
+        }
+
         try{
-            await api.post("/api/negocia-if/usuarios/criar-usuario", usuario)
+            await api.post("/api/negocia-if/usuarios/criar-usuario", payload)
 
             toast.success("Cadastro realizado com sucesso!")
 
@@ -63,8 +83,6 @@ const CadastroUsuario = () => {
             toast.error(mensagemErro);
             console.error(error)
         }
-
-         
     }
 
     return (

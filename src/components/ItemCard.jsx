@@ -15,7 +15,10 @@ export default function Itens({item}){
             numero = "55" + numero;
         }
 
-        const mensagem = `Olá, tenho interesse no item: ${item.nome}`;
+        const linkItem = `${window.location.origin}/item/${item.id}`;
+
+        const mensagem = `Olá, tenho interesse no item: ${item.nome}Link do item: ${linkItem}`;
+
         const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
         window.open(url, "_blank");
     }
@@ -40,18 +43,14 @@ export default function Itens({item}){
                 )}
             </section>
 
+            <section className="controle-carrosel">
+                <CarroselFotos
+                    total={item.fotos.length}
+                    indexAtual={fotoIndex}
+                    onChange={setFotoIndex}
+                />
+            </section>
             
-            {item.fotos && item.fotos.length > 1 && (
-                <section className="controle-carrosel">
-                    <CarroselFotos
-                        total={item.fotos.length}
-                        indexAtual={fotoIndex}
-                        onChange={setFotoIndex}
-                    />
-                </section>
-            )}
-           
-
             <section className="item-conteudo">
 
                 <h3 className="item-nome">{item.nome}</h3>

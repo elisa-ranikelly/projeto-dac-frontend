@@ -1,29 +1,35 @@
 import "./CarroselFotos.css";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
-function CarroselFotos({ total, onChange }) {
+function CarroselFotos({ total, indexAtual, onChange }) {
+
+    function anterior(){
+        if(indexAtual > 0) {
+            onChange(indexAtual - 1);
+        }
+    }
+
+    function proximo() {
+        if(indexAtual < total - 1){
+            onChange(indexAtual + 1);
+        }
+    }
 
     return (
+        <div className="carrossel-custom">
+            <button onClick={anterior} disabled={indexAtual === 0}>
+                <FiChevronLeft size={22} />
+            </button>
 
-        <Swiper
-            modules={[Navigation, Pagination]}
-            slidesPerView={1}
-            navigation
-            pagination={{clickable: true}}
-            onSlideChange={(swiper) => onChange(swiper.activeIndex)}
-            className="swiper-controle">
+            <span className="contador">
+                {indexAtual + 1} / {total}
+            </span>
 
-            {Array.from({ length: total }).map((_, index) => (
-                <SwiperSlide key={index}>
-                    <div style={{ height: "1px" }} />
-                </SwiperSlide>
-            ))}
-            </Swiper>
+            <button onClick={proximo} disabled={indexAtual === total - 1}>
+                <FiChevronRight size={22} />
+            </button>
+        </div>
     );
 }
 

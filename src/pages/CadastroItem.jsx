@@ -100,7 +100,10 @@ const CadastroItem = () => {
 
     function handleFotos(event) {
         const arquivos = Array.from(event.target.files);
-        setFotos(arquivos);
+        setFotos((prevFotos) => [
+            ...prevFotos,
+            ...arquivos
+        ]);
     };
 
 
@@ -177,4 +180,4 @@ const CadastroItem = () => {
   );
 };
 
-export default CadastroItem
+export default CadastroItem;

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { aprovarItem, reprovarItem } from "../services/itemService";
 import { toast } from "react-toastify";
-import Input from "./Input";
 import { BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
 import "./ItensPendentesCard.css";
 import "./MeusItensCard.css";
