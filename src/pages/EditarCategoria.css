@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.editar-categoria-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.form-editar-categoria{
+    width: 500px;
+    background-color: #0c492a48;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.271);
+    padding: 25px;
+}

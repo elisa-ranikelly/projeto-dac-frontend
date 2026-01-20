@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Categoria.css";
 import "./media-queries/forms.css";
 import Input from "../components/Input";
@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 const Categoria = () => {
     const [nomeCategoria, setNomeCategoria] = useState("");
+    const navigate = useNavigate();
 
     const cadastrarCategoria = async(event) => {
         event.preventDefault();
@@ -21,6 +22,7 @@ const Categoria = () => {
             await criarCategoria({ nome: nomeCategoria });
             toast.success("Categoria cadastrada com sucesso!");
             setNomeCategoria("");
+            navigate("/gerenciar-categorias");
         } catch (error) {
             const mensagemErro = error.response?.data?.message || "Erro ao cadastrar categoria!";
             toast.error(mensagemErro);
@@ -43,7 +45,7 @@ const Categoria = () => {
 
                 <button type="submit" className="btn">Cadastrar</button>
 
-                <Link to={"/perfil-admin"} className="btn">Voltar</Link>
+                <Link to={"/gerenciar-categorias"} className="btn">Voltar</Link>
             </form>
         </section>
 
