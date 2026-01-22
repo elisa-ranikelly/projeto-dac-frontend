@@ -15,6 +15,7 @@ import MeusItens from "./pages/MeusItens";
 import EditarItem from "./pages/EditarItem";
 import GerenciarCategorias from "./pages/GerenciarCategorias";
 import EditarCategoria from "./pages/EditarCategoria";
+import EditarPerfil from "./pages/EditarPerfil";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/editar-item/:id" element={<EditarItem/>} />
           <Route path="/gerenciar-categorias" element={<GerenciarCategorias/>} />
           <Route path="/editar-categoria/:id" element={<EditarCategoria />} />
+          <Route path="/editar-perfil/:id" element={<EditarPerfil />} />
         </Routes>
       </div>
       <ToastContainer

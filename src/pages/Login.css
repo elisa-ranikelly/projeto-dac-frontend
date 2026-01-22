@@ -40,6 +40,9 @@ div.lembranca{
     color: white;
 }
 
+div.lembranca label{
+    margin-top: 10px;
+}
 
 section.container div.cadastro{
     font-size: 14px;

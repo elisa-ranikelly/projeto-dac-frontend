@@ -4,6 +4,7 @@ import AdminForm from "../components/AdminForm"
 import api from "../services/api"
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
+import {listarUsuarios, criarUsuario} from "../services/usuarioService";
 
 const CadastroUsuario = () => {
     
@@ -26,8 +27,7 @@ const CadastroUsuario = () => {
     const voltarPara = isPrimeiroUsuario ? "/" : "/perfil-admin"
 
     useEffect(() => {
-        api.get("/api/negocia-if/usuarios/listar-usuarios")
-        .then(resp => {
+        listarUsuarios().then(resp => {
             if (resp.data.length === 0) {
                 setIsPrimeiroUsuario(true);
             }
@@ -67,8 +67,7 @@ const CadastroUsuario = () => {
         }
 
         try{
-            await api.post("/api/negocia-if/usuarios/criar-usuario", payload)
-
+            await criarUsuario(payload);
             toast.success("Cadastro realizado com sucesso!")
 
             setUsuario({

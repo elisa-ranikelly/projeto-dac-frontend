@@ -14,6 +14,7 @@ const Login = () => {
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    const [lembrar, setLembrar] = useState(false);
 
     const navigate = useNavigate();
 
@@ -24,12 +25,12 @@ const Login = () => {
         try{
             const response = await login (email,senha);
 
-            localStorage.setItem("usuario", JSON.stringify(response.data));
-            console.log("Login response:", response.data)
-
+            if(lembrar){
+                localStorage.setItem("usuario", JSON.stringify(response.data));
+            }else{
+                sessionStorage.setItem("usuario", JSON.stringify(response.data));
+            }
             toast.success("Login realizado com sucesso!");
-            console.log("Role:", response.data.roles);
-
             navigate("/catalogo");
         } catch (error){
             toast.error("Email ou senha inválidos!");
@@ -66,7 +67,7 @@ const Login = () => {
 
                 <div className="lembranca">
                     <label>
-                        <input type="checkbox"/> Lembre-se de mim
+                        <input type="checkbox" checked={lembrar} onChange={(e) => setLembrar(e.target.checked)}/> Lembre-se de mim
                     </label>
                 </div>
                 <button type="submit" className="btn">Entrar</button>
@@ -84,4 +85,4 @@ const Login = () => {
 }
 
 
-export default Login
+export default Login;

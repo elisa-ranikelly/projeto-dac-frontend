@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+.perfil-card{
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto;
+    padding: 20px 0px;
+
+    width: 600px;
+    height: 380px;
+    border: 1px solid var(--cor3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.189);
+}
+
+.perfil-card h2{
+    text-align: center;
+    color: var(--cor3);
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+}
+
+.perfil-card .informacoes{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.perfil-card .informacoes p {
+    color: #333;
+}
+
+.perfil-card .informacoes strong {
+    color: #393434;
+}
+
+.perfil-card .acoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 20px;
+}
+
+.perfil-card .btn {
+    padding: 6px 8px;
+    font-size: 0.8rem;
+    width: 150px;
+
+    transition: transform 0.2s;
+}
+
+.perfil-card .btn:hover {
+    transform: scale(1.08);
+}
+
+.perfil-card .btn-editar {
+    background-color: blue;
+    color: white;
+}
+
+.perfil-card .btn-excluir {
+    background-color: red;
+    color: white;
+}
+
+.perfil-card .icone {
+    margin-right: 6px;
+}

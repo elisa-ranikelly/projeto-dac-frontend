@@ -68,4 +68,4 @@ const UsuarioForm = ({usuario, setUsuario, confirmarSenha, setConfirmarSenha, on
     )
  }
 
- export default UsuarioForm
+ export default UsuarioForm;
