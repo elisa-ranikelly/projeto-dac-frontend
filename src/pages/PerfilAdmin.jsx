@@ -1,14 +1,24 @@
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
 import PerfilCard from "../components/PerfilCard";
+import { buscarUsuarioLogado } from "../services/usuarioService";
+import {toast} from "react-toastify";
 
 function PerfilAdmin() {
 
     const [usuario, setUsuario] = useState(null);
 
     useEffect(() => {
-        const usuarioLogado = JSON.parse(localStorage.getItem("usuario"));
-        setUsuario(usuarioLogado);
+        async function carregarPerfil(){
+            try{
+                const response = await buscarUsuarioLogado();
+                setUsuario(response.data);
+            }catch(error){
+                const mensagemErro = error.response?.data?.mensagem || "Erro ao carregar perfil.";
+                toast.error(mensagemErro);
+            }
+        }
+        carregarPerfil();
     },[])
     return(
         <article>

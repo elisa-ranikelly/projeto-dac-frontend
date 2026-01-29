@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import UsuarioForm from "../components/UsuarioForm";
 import AdminForm from "../components/AdminForm"
-import api from "../services/api"
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 import {listarUsuarios, criarUsuario} from "../services/usuarioService";
@@ -20,7 +19,16 @@ const CadastroUsuario = () => {
     const tipoCadastro = searchParams.get("tipo");
 
     const [isPrimeiroUsuario, setIsPrimeiroUsuario] = useState(false);
-    const usuarioLogado = JSON.parse(localStorage.getItem("usuario"));
+
+    const authLocal = localStorage.getItem("auth");
+    const authSession = sessionStorage.getItem("auth");
+
+    const usuarioLogado = authLocal
+        ? JSON.parse(authLocal)
+        : authSession
+        ? JSON.parse(authSession)
+        : null;
+
     const isAdminLogado = usuarioLogado?.roles?.includes("ADMIN");
     const isCadastroAdmin = tipoCadastro === "admin";
 
@@ -32,8 +40,10 @@ const CadastroUsuario = () => {
                 setIsPrimeiroUsuario(true);
             }
         })
-        .catch(() => {
-            toast.error("Erro ao verificar usuários existentes!");
+        .catch((error) => {
+            if(error.response?.status !== 403){
+                toast.error("Erro ao verificar usuários existentes!");
+            }
         })
     }, []);
 
@@ -45,11 +55,7 @@ const CadastroUsuario = () => {
              return
         }
 
-        let tipoUsuario = "USER";
-
-        if(isPrimeiroUsuario || (isAdminLogado && isCadastroAdmin)){
-            tipoUsuario = "ADMIN";
-        }
+        const tipoUsuario = isPrimeiroUsuario || (isAdminLogado && isCadastroAdmin) ? "ADMIN" : "USER";
 
         const payload = {
             nome: usuario.nome,

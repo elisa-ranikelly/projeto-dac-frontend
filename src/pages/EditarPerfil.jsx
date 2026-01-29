@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { atualizarUsuario, buscarUsuarioPorId } from "../services/usuarioService";
+import { atualizarUsuario, buscarUsuarioLogado, buscarUsuarioPorId } from "../services/usuarioService";
 import { toast } from "react-toastify";
 import Input from "../components/Input";
 import LinkButton from "../components/LinkBtn";
 import "./EditarPerfil.css"
-
 
 function EditarPerfil(){
 
@@ -25,9 +24,9 @@ function EditarPerfil(){
     const ehAdmin = roles.includes("ADMIN")
 
     useEffect(() => {
-        async function carregarUsuario() {
+        async function carregarPerfil() {
             try{
-                const response = await buscarUsuarioPorId(id);
+                const response = await buscarUsuarioLogado();
                 setUsuario({
                     nome: response.data.nome,
                     email: response.data.email,
@@ -39,8 +38,8 @@ function EditarPerfil(){
                 toast.error("Erro ao carregar dados do usuário!");
             }
         }
-        carregarUsuario();
-    }, [id]);
+        carregarPerfil();
+    }, []);
 
     function handleChange(e){
         const {name, value} = e.target;
@@ -66,24 +65,22 @@ function EditarPerfil(){
         }
 
         try{
-            await atualizarUsuario(id, usuarioParaAtualizar);
+            const response = await atualizarUsuario(id, usuarioParaAtualizar);
             toast.success("Usuário atualizado com sucesso!");
 
-            const usuarioAtualizado = {id, 
-            nome: usuario.nome,
-            email: usuario.email, 
-            roles,
-            telefone: ehAdmin ? null : usuario.telefone};
+            if(response.data.token){
+                localStorage.setItem(
+                    "auth", 
+                    JSON.stringify({ token: response.data.token })
+                );
+            }
 
-            localStorage.setItem("usuario", JSON.stringify(usuarioAtualizado));
-
-            navigate(-1);
+            navigate(ehAdmin? "/perfil-admin" : "/perfil-usuario");
         }catch (error){
             const mensagemErro = error.response?.data?.message || "Erro ao atualizar perfil.";
             toast.error(mensagemErro);
         }
     }
-
 
     return(
         <section className="editar-perfil-container">

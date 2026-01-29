@@ -10,7 +10,7 @@ function MeusItens() {
     const usuario = JSON.parse(localStorage.getItem("usuario"));
     async function carregarMeusItens() {
         try {
-            const response = await listarMeusItens(usuario.id);
+            const response = await listarMeusItens();
             console.log("Resposta completa:", response);
             console.log("Dados recebidos:", response.data);
             console.log("Quantidade:", response.data.length);
@@ -24,8 +24,6 @@ function MeusItens() {
     useEffect(() => {
         carregarMeusItens();
     }, []);
-
-    
 
     return (
         <article>

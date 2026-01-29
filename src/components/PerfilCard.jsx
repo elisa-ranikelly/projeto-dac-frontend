@@ -13,6 +13,7 @@ function PerfilCard({usuario}){
 
         try{
             await excluirUsuario(usuario.id);
+            localStorage.removeItem("auth");
             localStorage.clear();
             toast.success("Conta excluída com sucesso!");
             navigate("/");

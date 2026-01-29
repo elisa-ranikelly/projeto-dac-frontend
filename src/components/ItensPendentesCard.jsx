@@ -49,7 +49,7 @@ function ItensPendentesCard({ item, recarregarItens }) {
                 )}
             </div>
             <div className="informacoes">
-                
+                <p><strong>{item.nome}</strong></p>
                 <p><strong>{item.descricao}</strong></p>
                 <p><strong>Categoria:</strong> {item.categoria}</p>
                 <p><strong>Disponibilidade:</strong> {formatarDisponibilidade(item.statusDisponibilidade)}</p>

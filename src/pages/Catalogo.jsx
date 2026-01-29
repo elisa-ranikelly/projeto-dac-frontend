@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Catalogo.css";
 import Itens from "../components/ItemCard.jsx";
 import "./media-queries/catalogo-resp.css";
@@ -26,7 +26,15 @@ export default function Catalogo() {
     const totalPaginas = Math.ceil(itens.length / itensPorPagina);
 
     //verificar se é admin ou usuario comum
-    const usuario = JSON.parse(localStorage.getItem("usuario") || "null");
+    const authLocal = localStorage.getItem("auth");
+    const authSession = sessionStorage.getItem("auth");
+
+    const usuario = authLocal
+        ? JSON.parse(authLocal)
+        : authSession
+        ? JSON.parse(authSession)
+        : null;
+        
     const isAdmin = usuario?.roles?.includes("ADMIN");
     const perfilRoute = isAdmin ? "/perfil-admin" : "/perfil-usuario";
 

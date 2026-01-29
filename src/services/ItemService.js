@@ -14,8 +14,8 @@ export function buscarItemPorNomeECategoria(nome, idCategoria) {
     })
 }
 
-export function criarItemMultipart(idUsuario, formData){
-    return api.post(`/api/negocia-if/itens/criar-item/${idUsuario}`, formData, {
+export function criarItemMultipart(formData){
+    return api.post(`/api/negocia-if/itens/criar-item`, formData, {
         headers: {
             "Content-Type": "multipart/form-data"
         }
@@ -30,8 +30,8 @@ export function atualizarItemMultipart(idItem, formData){
     });
 }
 
-export function listarMeusItens(idUsuario){
-    return api.get(`/api/negocia-if/itens/listar-meus-itens/${idUsuario}`);
+export function listarMeusItens(){
+    return api.get(`/api/negocia-if/itens/listar-meus-itens`);
 }
 
 export function listarItensPendentes(){

@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
-import {buscarUsuarioPorId} from "../services/usuarioService";
+import {buscarUsuarioLogado} from "../services/usuarioService";
 import PerfilCard from "../components/PerfilCard";
+import {toast} from "react-toastify";
 
 function PerfilUsuario() {
 
-    const usuarioLogado = JSON.parse(localStorage.getItem("usuario"));
     const [usuario, setUsuario] = useState(null);
 
     useEffect(() => {
-        async function carregarUsuario(){
+        async function carregarPerfil(){
             try{
-                const response = await buscarUsuarioPorId(usuarioLogado.id);
+                const response = await buscarUsuarioLogado();
                 setUsuario(response.data);
             }catch (error) {
-                toast.error("Erro ao carregar usuário!");
+                const mensagemErro = error.response?.data?.mensagem || "Erro ao carregar perfil.";
+                toast.error(mensagemErro);
             }
         }
-        carregarUsuario();
+        carregarPerfil();
     }, []);
 
     return (

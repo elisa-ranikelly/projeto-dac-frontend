@@ -1,14 +1,14 @@
 export function formatarPreco(item) {
 
-    if(item.statusDisponibilidade === "DISPONIVEL_VENDA") {
-        return "R$ " + Number(item.preco).toFixed(2).replace(".", ",");   
+    if (item.statusDisponibilidade === "DISPONIVEL_TROCA") {
+        return "Troca";
     }
 
-    if(item.preco != null) {
-        return `R$ ${Number(item.preco).toFixed(2).replace(".", ",")}`;
+    if (item.statusDisponibilidade === "DISPONIVEL_VENDA" && item.preco != null) {
+        return "R$ " + Number(item.preco).toFixed(2).replace(".", ",");
     }
 
-    return null;
+    return "—";
 }
 
 export function formatarDisponibilidade(status) {

@@ -16,6 +16,7 @@ import EditarItem from "./pages/EditarItem";
 import GerenciarCategorias from "./pages/GerenciarCategorias";
 import EditarCategoria from "./pages/EditarCategoria";
 import EditarPerfil from "./pages/EditarPerfil";
+import PrivateRoute from "./routes/PrivateRoute";
 
 function App() {
   return (
@@ -25,17 +26,18 @@ function App() {
           <Route path="/" element={<Inicio />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<CadastroUsuario />} />
-          <Route path="/categoria" element={<Categoria />} />
-          <Route path="/cadastro-item" element={<CadastroItem/>} />
-          <Route path="/catalogo" element={<Catalogo />} />
-          <Route path="/perfil-usuario" element={<PerfilUsuario/>} />
-          <Route path="/perfil-admin" element={<PerfilAdmin/>} />
-          <Route path="/itens-pendentes" element={<ItensPendentes/>} />
-          <Route path="/meus-itens" element={<MeusItens/>} />
-          <Route path="/editar-item/:id" element={<EditarItem/>} />
-          <Route path="/gerenciar-categorias" element={<GerenciarCategorias/>} />
-          <Route path="/editar-categoria/:id" element={<EditarCategoria />} />
-          <Route path="/editar-perfil/:id" element={<EditarPerfil />} />
+          
+          <Route path="/categoria" element={<PrivateRoute><Categoria /></PrivateRoute>} />
+          <Route path="/catalogo" element={<PrivateRoute><Catalogo /></PrivateRoute>} />
+          <Route path="/cadastro-item" element={<PrivateRoute><CadastroItem /></PrivateRoute>}/>
+          <Route path="/perfil-usuario" element={<PrivateRoute><PerfilUsuario /></PrivateRoute>}/>
+          <Route path="/perfil-admin" element={<PrivateRoute><PerfilAdmin /></PrivateRoute>}/>
+          <Route path="/itens-pendentes" element={<PrivateRoute><ItensPendentes /></PrivateRoute>}/>
+          <Route path="/meus-itens" element={<PrivateRoute><MeusItens /></PrivateRoute>}/>
+          <Route path="/editar-item/:id" element={<PrivateRoute><EditarItem /></PrivateRoute>} />
+          <Route path="/gerenciar-categorias" element={<PrivateRoute><GerenciarCategorias /></PrivateRoute>}/>
+          <Route path="/editar-categoria/:id" element={<PrivateRoute><EditarCategoria /></PrivateRoute>}/>
+          <Route path="/editar-perfil/:id" element={<PrivateRoute><EditarPerfil /></PrivateRoute>}/>
         </Routes>
       </div>
       <ToastContainer
@@ -47,4 +49,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

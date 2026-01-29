@@ -25,12 +25,20 @@ const Login = () => {
         try{
             const response = await login (email,senha);
 
+            const dadosAuth = {
+                id: response.data.id,
+                token: response.data.token,
+                email: response.data.email,
+                roles: response.data.roles
+            };
+
             if(lembrar){
-                localStorage.setItem("usuario", JSON.stringify(response.data));
+                localStorage.setItem("auth", JSON.stringify(dadosAuth));
             }else{
-                sessionStorage.setItem("usuario", JSON.stringify(response.data));
+                sessionStorage.setItem("auth", JSON.stringify(dadosAuth));
             }
             toast.success("Login realizado com sucesso!");
+            console.log(response.data)
             navigate("/catalogo");
         } catch (error){
             toast.error("Email ou senha inválidos!");

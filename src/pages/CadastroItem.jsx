@@ -44,7 +44,14 @@ const CadastroItem = () => {
     async function cadastrarItem(event)  {
         event.preventDefault();
 
-        const usuario = JSON.parse(localStorage.getItem("usuario"));
+        const authLocal = localStorage.getItem("auth");
+        const authSession = sessionStorage.getItem("auth");
+
+        const usuario = authLocal
+            ? JSON.parse(authLocal)
+            : authSession
+            ? JSON.parse(authSession)
+            : null;
 
         if(!usuario) {
             toast.error("Usuário não encontrado!")
@@ -81,7 +88,7 @@ const CadastroItem = () => {
         });
 
         try{
-            await criarItemMultipart(usuario.id, fd);
+            await criarItemMultipart(fd);
             toast.success("Item cadastrado com sucesso! Aguardando aprovação.");
 
             setNome("");
